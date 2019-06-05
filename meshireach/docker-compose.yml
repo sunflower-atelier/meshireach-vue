@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - 3002:3002
+    volumes:
+      - ./:/var/www/meshireach
+    stdin_open: true
+    tty: true
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3002
