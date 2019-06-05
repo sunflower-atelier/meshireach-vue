@@ -5,4 +5,4 @@ RUN apk update &&\
     npm install npm
 
 EXPOSE 3002
-CMD ["npm", "run", "dev"]
+CMD ["yarn", "dev"]
