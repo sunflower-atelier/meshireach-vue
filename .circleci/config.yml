@@ -3,7 +3,7 @@ executors:
   default:
     docker:
       - image: circleci/node:8.16.0
-    working_directory: /var/www/meshireach
+    working_directory: ~/meshireach
 jobs:
   setup:
     executor:
