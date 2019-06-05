@@ -1,0 +1,39 @@
+version: 2.1
+executors:
+  default:
+    docker:
+      - image: circleci/node:8.16.0
+    working_directory: /var/www/meshireach
+jobs:
+  setup:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node modules cache
+          key: modules-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: install
+          command: yarn install
+      - save_cache:
+          name: Save node modules cache
+          key: modules-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+  test:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run:
+          name: check format
+          command: yarn lint
+
+workflows:
+  testing:
+    jobs:
+      - setup
+      - test:
+          requires:
+            - setup
