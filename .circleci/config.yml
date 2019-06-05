@@ -5,7 +5,7 @@ executors:
       - image: circleci/node:8.16.0
     working_directory: ~/meshireach
 jobs:
-  setup:
+  test:
     executor:
       name: default
     steps:
@@ -21,11 +21,6 @@ jobs:
           key: modules-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-  test:
-    executor:
-      name: default
-    steps:
-      - checkout
       - run:
           name: check format
           command: yarn lint
@@ -33,7 +28,4 @@ jobs:
 workflows:
   testing:
     jobs:
-      - setup
-      - test:
-          requires:
-            - setup
+      - test
