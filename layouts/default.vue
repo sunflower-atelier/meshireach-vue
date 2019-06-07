@@ -5,7 +5,15 @@
 </template>
 
 <script>
-import 'bulma/css/bulma.css'; 
+import Vue from 'vue'
+// ElementUI
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+// ElementUIでの言語設定、datePickerとかで適用される
+import locale from 'element-ui/lib/locale/lang/ja'
+
+Vue.use(ElementUI, {locale});
+
 export default{
   
 }
