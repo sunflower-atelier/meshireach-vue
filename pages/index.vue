@@ -24,10 +24,14 @@
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
+import axios from '@nuxtjs/axios'
 
 export default {
   components: {
     AppLogo
+  },
+  async created() {
+    console.log(await this.$axios.get('http://localhost:3000/ping'))
   }
 }
 </script>
