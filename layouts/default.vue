@@ -4,6 +4,13 @@
   </div>
 </template>
 
+<script>
+import 'bulma/css/bulma.css'; 
+export default{
+  
+}
+</script>
+
 <style>
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

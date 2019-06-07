@@ -4818,6 +4818,11 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
+nuxt-client-init-module@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/nuxt-client-init-module/-/nuxt-client-init-module-0.1.4.tgz#1ee7c4559d722c4feda6924d5d6f8779d9ec9b25"
+  integrity sha512-K2vlh6EKcn4+JUG3P7kblHyn4s32kjYLwWqk09nY4nbfM7WL2albXV5I8XhxifY/N+zvbe1CFC/kwNDxgGQwIw==
+
 nuxt@^2.0.0:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.8.1.tgz#10a307e51973fa7b55abfeb41b84c76cbdd6f2f6"
