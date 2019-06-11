@@ -10,7 +10,7 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button size="medium" @click="clickFormButton">{{ formRole }}</el-button>
+          <el-button type="primary" size="medium" @click="clickFormButton">{{ formRole }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -31,10 +31,10 @@ export default {
     }
   },
   methods: {
-    clickFormButton: function(event){
-      this.$emit('click-form-button',this.data)
+    clickFormButton: function(){
+      this.$emit('click-form-button',this.form)
     },
-    clickGoogleButton: function(event){
+    clickGoogleButton: function(){
       this.$emit('click-google-button')
     }
   }

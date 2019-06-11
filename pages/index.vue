@@ -35,9 +35,9 @@ export default {
   components: {
     AppLogo
   },
-  async created() {
-    console.log(await this.$axios.get('http://localhost:3000/ping'))
-  },
+  // async created() {
+  //   console.log(await this.$axios.get('http://localhost:3000/ping'))
+  // },
   middleware: 'authorized'
 
 }

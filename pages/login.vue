@@ -6,10 +6,10 @@
         <h2>your awesome dish</h2>
         <el-tabs type="border-card" stretch>
           <el-tab-pane label="Signin">
-            <signin-signup-form form-role='signin'></signin-signup-form>
+            <signin-signup-form form-role='signin' @click-form-button="signinWithForm" @click-google-button="signinWithGoogle"></signin-signup-form>
           </el-tab-pane>
           <el-tab-pane label="Signup">
-            <signin-signup-form form-role='signup'></signin-signup-form>
+            <signin-signup-form form-role='signup' @click-form-button="signupWithForm" @click-google-button="signupWithGoogle"></signin-signup-form>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -24,6 +24,33 @@ export default{
   middleware: 'anonymous',
   components: {
     SigninSignupForm,
+  },
+  // signin,signupの手段が決まったら変更する
+  methods:{
+    signinWithForm : function(formVal){
+      console.log("signin with form")
+      console.log(formVal.email)
+      console.log(formVal.password)
+      this.$store.commit('setUser',100)
+      this.$router.push('/')
+    },
+    signinWithGoogle : function(){
+      console.log("signin with google")
+      this.$store.commit('setUser',100)
+      this.$router.push('/')
+    },
+    signupWithForm : function(formVal){
+      console.log("signup with form")
+      console.log(formVal.email)
+      console.log(formVal.password)
+      this.$store.commit('setUser',100)
+      this.$router.push('/')
+    },
+    signupWithGoogle : function(){
+      console.log("signup with google")
+      this.$store.commit('setUser',100)
+      this.$router.push('/')
+    },
   }
 }
 </script>
