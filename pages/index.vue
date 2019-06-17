@@ -30,14 +30,11 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-      ...mapState(['connect','user'])
+    ...mapState(['connect','user'])
   },
   components: {
     AppLogo
   },
-  // async created() {
-  //   console.log(await this.$axios.get('http://localhost:3000/ping'))
-  // },
   middleware: 'authorized'
 
 }

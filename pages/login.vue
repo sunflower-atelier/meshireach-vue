@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import SigninSignupForm from '~/components/SigninSignupForm.vue'
+import SigninSignupForm from '../components/SigninSignupForm.vue'
 
 export default{
   middleware: 'anonymous',
@@ -28,29 +28,29 @@ export default{
   // signin,signupの手段が決まったら変更する
   methods:{
     signinWithForm : function(formVal){
-      console.log("signin with form")
+      console.log('signin with form')
       console.log(formVal.email)
       console.log(formVal.password)
-      this.$store.commit('setUser',100)
-      this.$router.push('/')
+      this.setUserAndRedirect(100)
     },
     signinWithGoogle : function(){
-      console.log("signin with google")
-      this.$store.commit('setUser',100)
-      this.$router.push('/')
+      console.log('signin with google')
+      this.setUserAndRedirect(100)
     },
     signupWithForm : function(formVal){
-      console.log("signup with form")
+      console.log('signup with form')
       console.log(formVal.email)
       console.log(formVal.password)
-      this.$store.commit('setUser',100)
-      this.$router.push('/')
+      this.setUserAndRedirect(100)
     },
     signupWithGoogle : function(){
-      console.log("signup with google")
-      this.$store.commit('setUser',100)
-      this.$router.push('/')
+      console.log('signup with google')
+      this.setUserAndRedirect(100)
     },
+    setUserAndRedirect : function(user){
+      this.$store.commit('setUser', user)
+      this.$router.push('/')
+    }
   }
 }
 </script>
