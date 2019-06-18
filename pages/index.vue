@@ -24,7 +24,6 @@
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
-import axios from '@nuxtjs/axios'
 
 import { mapState } from 'vuex'
 
