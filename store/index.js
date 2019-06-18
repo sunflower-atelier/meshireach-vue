@@ -15,7 +15,7 @@ export const getters = {
 }
 
 export const actions = {
-  nuxtServerInit({ commit }, { req }){
-    // setuserの処理
+  nuxtServerInit({ commit }, { req }){ /* eslint no-unused-vars: off */
+    // setuserの処理, ちゃんと実装次第上のeslint no-unused-varsは消してね
   }
 }

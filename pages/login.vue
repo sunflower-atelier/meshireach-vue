@@ -4,12 +4,20 @@
       <div class="form-wrapper">
         <h1>meshireach</h1>
         <h2>your awesome dish</h2>
-        <el-tabs type="border-card" stretch>
+        <el-tabs
+          type="border-card"
+          stretch>
           <el-tab-pane label="Signin">
-            <signin-signup-form form-role='signin' @click-form-button="signinWithForm" @click-google-button="signinWithGoogle"></signin-signup-form>
+            <signin-signup-form
+              form-role="signin"
+              @click-form-button="signinWithForm"
+              @click-google-button="signinWithGoogle"/>
           </el-tab-pane>
           <el-tab-pane label="Signup">
-            <signin-signup-form form-role='signup' @click-form-button="signupWithForm" @click-google-button="signupWithGoogle"></signin-signup-form>
+            <signin-signup-form
+              form-role="signup"
+              @click-form-button="signupWithForm"
+              @click-google-button="signupWithGoogle"/>
           </el-tab-pane>
         </el-tabs>
       </div>

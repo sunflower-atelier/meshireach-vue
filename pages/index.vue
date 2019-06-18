@@ -24,16 +24,15 @@
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
-import axios from '@nuxtjs/axios'
 
 import { mapState } from 'vuex'
 
 export default {
-  computed: {
-    ...mapState(['connect','user'])
-  },
   components: {
     AppLogo
+  },
+  computed: {
+    ...mapState(['connect','user'])
   },
   middleware: 'authorized'
 
