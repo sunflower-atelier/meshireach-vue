@@ -1,27 +1,50 @@
 <template>
   <div>
     <el-card shadow="never">
-      <el-form ref="form" :model="form" label-width="120px">
+      <el-form
+        ref="form"
+        :model="form"
+        label-width="120px">
         <el-form-item label="mail adress">
-          <el-input placeholder="your@email.com" v-model="form.email"></el-input>
+          <el-input
+            v-model="form.email"
+            placeholder="your@email.com"/>
         </el-form-item>
         <el-form-item label="password">
-          <el-input placeholder="your password" v-model="form.password" type="password"></el-input>
+          <el-input
+            v-model="form.password"
+            placeholder="your password"
+            type="password"/>
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" size="medium" @click="clickFormButton">{{ formRole }}</el-button>
+          <el-button
+            type="primary"
+            size="medium"
+            @click="clickFormButton">
+            {{ formRole }}
+          </el-button>
         </el-form-item>
       </el-form>
     </el-card>
-    <el-button size="medium" @click="clickGoogleButton" class="with-other-account-buton">{{ formRole }} with google acount</el-button>
+    <el-button
+      size="medium"
+      class="with-other-account-buton"
+      @click="clickGoogleButton">
+      {{ formRole }} with google acount
+    </el-button>
   </div>
 </template>
 
 <script>
 
 export default {
-  props: ['formRole'],
+  props: {
+    formRole: {
+      type: String,
+      required: true
+    },
+  },
   data() {
     return {
       form:{
