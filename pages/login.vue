@@ -27,6 +27,7 @@
 
 <script>
 import SigninSignupForm from '../components/SigninSignupForm.vue'
+import firebase from '../plugins/firebase.js'
 
 export default{
   middleware: 'anonymous',
@@ -35,28 +36,31 @@ export default{
   },
   // signin,signupの手段が決まったら変更する
   methods:{
-    signinWithForm : function(formVal){
-      console.log('signin with form')
-      console.log(formVal.email)
-      console.log(formVal.password)
-      this.setUserAndRedirect(100)
+    async signinWithForm(formVal){
+      let res = await firebase.auth().signInWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
+        this.$message.error('invalid input')
+      })
+      if(res){
+        this.$message.success('you are user')
+        this.setUserAndRedirect()
+      }
     },
     signinWithGoogle : function(){
-      console.log('signin with google')
-      this.setUserAndRedirect(100)
+      firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
     },
-    signupWithForm : function(formVal){
-      console.log('signup with form')
-      console.log(formVal.email)
-      console.log(formVal.password)
-      this.setUserAndRedirect(100)
+    async signupWithForm(formVal) {
+      await firebase.auth().createUserWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
+        this.$message.error('invalid input')
+      })
+      this.$message.success('your account is created.')
+      this.setUserAndRedirect()
     },
-    signupWithGoogle : function(){
-      console.log('signup with google')
-      this.setUserAndRedirect(100)
+    async signupWithGoogle(){
+      firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
     },
-    setUserAndRedirect : function(user){
-      this.$store.commit('setUser', user)
+    setUserAndRedirect : function(){
+      // this.$store.dispatch('setUser', user)
+      // console.log(this.$store.state)
       this.$router.push('/')
     }
   }

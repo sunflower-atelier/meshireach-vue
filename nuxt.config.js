@@ -13,7 +13,6 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  // mode: 'spa',
   /*
   ** Customize the progress bar color
   */
@@ -36,8 +35,14 @@ module.exports = {
       }
     }
   },
+  plugins: [
+    '@/plugins/firebase',
+    '@/plugins/auth'
+  ],
+  mode:'spa',
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv'
   ],
   axios: {
   }
