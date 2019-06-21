@@ -36,10 +36,8 @@
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
-import firebase from '../plugins/firebase.js'
-import auth from '../plugins/auth.js'
-
-// import { mapState } from 'vuex'
+import firebase from '../plugins/firebase'
+import auth from '../plugins/auth'
 
 export default {
   components: {
