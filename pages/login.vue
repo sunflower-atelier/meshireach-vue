@@ -41,12 +41,12 @@ export default{
     })
   },
   methods:{
-    async signinWithForm(formVal){
+    signinWithForm(formVal){
       firebase.auth().signInWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
         this.$message.error('Signin Failed')
       })
     },
-    async signupWithForm(formVal) {
+    signupWithForm(formVal) {
       firebase.auth().createUserWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
         this.$message.error('invalid input')
       })
