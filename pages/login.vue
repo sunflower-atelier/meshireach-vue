@@ -34,20 +34,20 @@ export default{
   },
   methods:{
     async signinWithForm(formVal){
-      let res = await firebase.auth().signInWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
-        this.$message.error('invalid input')
-      })
-      if(res){
-        this.$message.success('you are user')
+      firebase.auth().signInWithEmailAndPassword(formVal.email, formVal.password).then(() => {
+        this.$message.success('Login Succeeded')
         this.$router.push('/')
-      }
+      }).catch(() => {
+        this.$message.error('Login Failed')
+      })
     },
     async signupWithForm(formVal) {
-      await firebase.auth().createUserWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
+      firebase.auth().createUserWithEmailAndPassword(formVal.email, formVal.password).then(() => {
+        this.$message.success('your account is created.')
+        this.$router.push('/')
+      }).catch(() => {
         this.$message.error('invalid input')
       })
-      this.$message.success('your account is created.')
-      this.$router.push('/')
     }
   }
 }

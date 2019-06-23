@@ -45,10 +45,11 @@ export default {
   },
   methods:{
     async logout(){
-      await firebase.auth().signOut().catch(() => {
+      await firebase.auth().signOut().then(() => {
+        this.$router.push('/login')
+      }).catch(() => {
         this.$message.error('you cannot logout')
       })
-      this.$router.push('/login')
     },
     async sendPrivate(){
       let idToken = await getIdToken()
