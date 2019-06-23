@@ -37,7 +37,7 @@
 <script>
 import AppLogo from '~/components/AppLogo.vue'
 import firebase from '../plugins/firebase'
-import auth from '../plugins/auth'
+import getIdToken from '../plugins/id-token'
 
 export default {
   components: {
@@ -51,8 +51,7 @@ export default {
       this.$router.push('/login')
     },
     async sendPrivate(){
-      let user = await auth();
-      let idToken = await user.getIdToken(/* forceRefresh */ true)
+      let idToken = await getIdToken()
       let sendMsg = 'Bearer ' +idToken
       let res = await this.$axios.get('http://localhost:3000/private' ,{
         headers: {
