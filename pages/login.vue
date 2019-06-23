@@ -32,20 +32,22 @@ export default{
   components: {
     SigninSignupForm,
   },
+  mounted() {
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        this.$message.success('welcom to meshireach')
+        this.$router.push('/')
+      }
+    })
+  },
   methods:{
     async signinWithForm(formVal){
-      firebase.auth().signInWithEmailAndPassword(formVal.email, formVal.password).then(() => {
-        this.$message.success('Signin Succeeded')
-        this.$router.push('/')
-      }).catch(() => {
+      firebase.auth().signInWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
         this.$message.error('Signin Failed')
       })
     },
     async signupWithForm(formVal) {
-      firebase.auth().createUserWithEmailAndPassword(formVal.email, formVal.password).then(() => {
-        this.$message.success('your account is created.')
-        this.$router.push('/')
-      }).catch(() => {
+      firebase.auth().createUserWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
         this.$message.error('invalid input')
       })
     }
