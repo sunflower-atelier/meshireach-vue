@@ -35,10 +35,10 @@ export default{
   methods:{
     async signinWithForm(formVal){
       firebase.auth().signInWithEmailAndPassword(formVal.email, formVal.password).then(() => {
-        this.$message.success('Login Succeeded')
+        this.$message.success('Signin Succeeded')
         this.$router.push('/')
       }).catch(() => {
-        this.$message.error('Login Failed')
+        this.$message.error('Signin Failed')
       })
     },
     async signupWithForm(formVal) {
