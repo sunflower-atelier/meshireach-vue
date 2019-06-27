@@ -27,12 +27,6 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <el-button
-      size="medium"
-      class="with-other-account-buton"
-      @click="clickGoogleButton">
-      {{ formRole }} with google acount
-    </el-button>
   </div>
 </template>
 
@@ -65,9 +59,4 @@ export default {
 </script>
 
 <style scoped>
-.with-other-account-buton{
-  display: block;
-  margin: 10px auto 0;
-  width: 80%;
-}
 </style>

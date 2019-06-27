@@ -10,14 +10,12 @@
           <el-tab-pane label="Signin">
             <signin-signup-form
               form-role="signin"
-              @click-form-button="signinWithForm"
-              @click-google-button="signinWithGoogle"/>
+              @click-form-button="signinWithForm"/>
           </el-tab-pane>
           <el-tab-pane label="Signup">
             <signin-signup-form
               form-role="signup"
-              @click-form-button="signupWithForm"
-              @click-google-button="signupWithGoogle"/>
+              @click-form-button="signupWithForm"/>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -27,37 +25,31 @@
 
 <script>
 import SigninSignupForm from '../components/SigninSignupForm.vue'
+import firebase from '../plugins/firebase'
 
 export default{
   middleware: 'anonymous',
   components: {
     SigninSignupForm,
   },
-  // signin,signupの手段が決まったら変更する
+  mounted() {
+    firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        this.$message.success('welcom to meshireach')
+        this.$router.push('/')
+      }
+    })
+  },
   methods:{
-    signinWithForm : function(formVal){
-      console.log('signin with form')
-      console.log(formVal.email)
-      console.log(formVal.password)
-      this.setUserAndRedirect(100)
+    signinWithForm(formVal){
+      firebase.auth().signInWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
+        this.$message.error('Signin Failed')
+      })
     },
-    signinWithGoogle : function(){
-      console.log('signin with google')
-      this.setUserAndRedirect(100)
-    },
-    signupWithForm : function(formVal){
-      console.log('signup with form')
-      console.log(formVal.email)
-      console.log(formVal.password)
-      this.setUserAndRedirect(100)
-    },
-    signupWithGoogle : function(){
-      console.log('signup with google')
-      this.setUserAndRedirect(100)
-    },
-    setUserAndRedirect : function(user){
-      this.$store.commit('setUser', user)
-      this.$router.push('/')
+    signupWithForm(formVal) {
+      firebase.auth().createUserWithEmailAndPassword(formVal.email, formVal.password).catch(() => {
+        this.$message.error('invalid input')
+      })
     }
   }
 }

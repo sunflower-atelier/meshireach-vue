@@ -1,5 +1,9 @@
-export default async function({store, redirect}){
-  if(!store.getters.isAuthenticated){
-    return redirect('/login');
+import auth from '../plugins/auth'
+
+export default async function ({ redirect }) {
+
+  let user = await auth();
+  if(!user){
+    return redirect('/login')
   }
 }

@@ -18,24 +18,51 @@
           target="_blank"
           class="button--grey">GitHub</a>
       </div>
+      <el-button
+        type="primary"
+        size="medium"
+        @click="logout">
+        logout
+      </el-button>
+      <el-button
+        type="primary"
+        size="medium"
+        @click="sendPrivate">
+        send private
+      </el-button>
     </div>
   </section>
 </template>
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
-
-import { mapState } from 'vuex'
+import firebase from '../plugins/firebase'
+import getIdToken from '../plugins/id-token'
 
 export default {
   components: {
     AppLogo
   },
-  computed: {
-    ...mapState(['connect','user'])
+  methods:{
+    async logout(){
+      await firebase.auth().signOut().then(() => {
+        this.$router.push('/login')
+      }).catch(() => {
+        this.$message.error('you cannot logout')
+      })
+    },
+    async sendPrivate(){
+      let idToken = await getIdToken()
+      let sendMsg = 'Bearer ' +idToken
+      let res = await this.$axios.get('http://localhost:3000/private' ,{
+        headers: {
+          'Authorization': sendMsg,
+        }
+      })
+      console.log(res)
+    }
   },
-  middleware: 'authorized'
-
+  middleware: 'authorized',
 }
 </script>
 
