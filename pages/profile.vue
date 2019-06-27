@@ -55,8 +55,13 @@ export default {
   },
   methods: {
     onConfirm() {
-      console.log('name=' + this.form.name
-        + ', message=' + this.form.message);
+      this.$axios.post('http://localhost:3000/profile', {
+        name: "hoge",
+        message: "foo",
+      })
+        .then(response => {
+          console.log("name=" + response.data.name);
+        })
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
