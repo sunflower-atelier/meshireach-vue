@@ -10,17 +10,22 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "test": "NODE_ENV=test jest",
     "precommit": "npm run lint"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.5.3",
     "@nuxtjs/dotenv": "^1.3.0",
     "@nuxtjs/proxy": "^1.3.3",
+    "babel-jest": "^24.8.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "element-ui": "^2.9.1",
     "firebase": "^6.2.0",
+    "jest": "^24.8.0",
     "npm-run-path": "^3.1.0",
     "nuxt": "^2.0.0",
-    "style-loader": "^0.23.1"
+    "style-loader": "^0.23.1",
+    "vue-jest": "^3.0.4"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

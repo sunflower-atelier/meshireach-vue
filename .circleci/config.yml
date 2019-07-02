@@ -24,6 +24,9 @@ jobs:
       - run:
           name: check format
           command: yarn lint
+      - run:
+          name: test
+          command: yarn test
 
 workflows:
   testing:
