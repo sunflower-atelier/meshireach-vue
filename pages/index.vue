@@ -21,12 +21,6 @@
       <el-button
         type="primary"
         size="medium"
-        @click="logout">
-        logout
-      </el-button>
-      <el-button
-        type="primary"
-        size="medium"
         @click="sendPrivate">
         send private
       </el-button>
@@ -36,21 +30,14 @@
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
-import firebase from '../plugins/firebase'
 import getIdToken from '../plugins/id-token'
 
 export default {
+  layout : 'AuthPage',
   components: {
     AppLogo
   },
   methods:{
-    async logout(){
-      await firebase.auth().signOut().then(() => {
-        this.$router.push('/login')
-      }).catch(() => {
-        this.$message.error('you cannot logout')
-      })
-    },
     async sendPrivate(){
       let idToken = await getIdToken()
       let sendMsg = 'Bearer ' +idToken
@@ -61,8 +48,7 @@ export default {
       })
       console.log(res)
     }
-  },
-  middleware: 'authorized',
+  }
 }
 </script>
 

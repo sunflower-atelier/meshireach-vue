@@ -36,6 +36,7 @@
 
 <script>
 export default {
+  layout : 'AuthPage',
   data() {
     return {
       form: {
