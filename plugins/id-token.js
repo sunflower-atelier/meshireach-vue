@@ -1,10 +1,13 @@
 import auth from './auth'
 
 
-async function getIdToken(){
+async function makeAuthHeaderBody(){
   let user = await auth();
   let idToken = await user.getIdToken(/* forceRefresh */ false)
-  return idToken
+  let sendMsg = 'Bearer ' +idToken
+  return {
+    'Authorization': sendMsg,
+  }
 }
 
-export default getIdToken
+export default makeAuthHeaderBody

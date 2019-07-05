@@ -30,7 +30,7 @@
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
-import getIdToken from '../plugins/id-token'
+import makeAuthHeaderBody from '../plugins/id-token'
 
 export default {
   layout : 'AuthPage',
@@ -39,12 +39,9 @@ export default {
   },
   methods:{
     async sendPrivate(){
-      let idToken = await getIdToken()
-      let sendMsg = 'Bearer ' +idToken
+      let authHeader = await makeAuthHeaderBody();
       let res = await this.$axios.get('http://localhost:3000/private' ,{
-        headers: {
-          'Authorization': sendMsg,
-        }
+        headers: authHeader
       })
       console.log(res)
     }
