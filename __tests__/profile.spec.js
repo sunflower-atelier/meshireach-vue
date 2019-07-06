@@ -15,60 +15,49 @@ describe('validation test', () => {
     })
   })
 
-  test('valid user id', () => {
+  /**
+   * inputに入力して, el-form-itemにつけられるclass名から入力が正しく認識されてるか確認する
+   * @param {int} inputIndex 何番目のinputか 
+   * @param {string} inputStr     inputに入力する文字列
+   * @param {string} expectedClassName el-form-itemにつくclass名(.is-success or .is-error)
+   */
+  let inputAndEvaluate = (inputIndex, inputStr, expectedClassName) => {
     let inputs = wrapper.findAll('input')
-    inputs.at(0).setValue('hogefoo0711')
-    inputs.at(0).trigger('blur')
-    expect(wrapper.find('.is-success').exists()).toBeTruthy()
+    inputs.at(inputIndex).setValue(inputStr)
+    inputs.at(inputIndex).trigger('blur')
+    expect(wrapper.find(expectedClassName).exists()).toBeTruthy()
+  }
+
+  test('valid user id', () => {
+    inputAndEvaluate(0, 'hogefoo0711', '.is-success')
   })
 
   test('empty user id is invalid', () => {
-    let inputs = wrapper.findAll('input')
-    inputs.at(0).setValue('')
-    inputs.at(0).trigger('blur')
-    expect(wrapper.find('.is-error').exists()).toBeTruthy()
+    inputAndEvaluate(0, '' , '.is-error')
   })
 
   test('user id has to contain only alphabet or number', () => {
-    let inputs = wrapper.findAll('input')
-    inputs.at(0).setValue('@@')
-    inputs.at(0).trigger('blur')
-    expect(wrapper.find('.is-error').exists()).toBeTruthy()
+    inputAndEvaluate(0, '@@', '.is-error')
   })
 
   test('valid name', () => {
-    let inputs = wrapper.findAll('input')
-    inputs.at(1).setValue('hoge ふう 風雅 88 ホゲホゲ')
-    inputs.at(1).trigger('blur')
-    expect(wrapper.find('.is-success').exists()).toBeTruthy()
+    inputAndEvaluate(1, 'hoge ふう 風雅 88 ホゲホゲ', '.is-success')
   })
 
   test('empty name is invalid', () => {
-    let inputs = wrapper.findAll('input')
-    inputs.at(1).setValue('')
-    inputs.at(1).trigger('blur')
-    expect(wrapper.find('.is-error').exists()).toBeTruthy()
+    inputAndEvaluate(1, '', '.is-error')
   })
 
   test('name must not begin with space', () => {
-    let inputs = wrapper.findAll('input')
-    inputs.at(1).setValue(' foo')
-    inputs.at(1).trigger('blur')
-    expect(wrapper.find('.is-error').exists()).toBeTruthy()
+    inputAndEvaluate(1, ' foo', '.is-error')
   })
 
   test('name must not end with space', () => {
-    let inputs = wrapper.findAll('input')
-    inputs.at(1).setValue('foo ')
-    inputs.at(1).trigger('blur')
-    expect(wrapper.find('.is-error').exists()).toBeTruthy()
+    inputAndEvaluate(1, 'foo ', '.is-error')
   })
 
   test('name must not contain symbol', () => {
-    let inputs = wrapper.findAll('input')
-    inputs.at(1).setValue('foo@')
-    inputs.at(1).trigger('blur')
-    expect(wrapper.find('.is-error').exists()).toBeTruthy()
+    inputAndEvaluate(1, 'foo@', '.is-error')
   })
 })
 
