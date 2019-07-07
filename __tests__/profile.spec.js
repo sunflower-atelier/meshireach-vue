@@ -61,23 +61,33 @@ describe('validation test', () => {
   })
 })
 
-describe('submit test', () => {
+describe('form value is correctly validated when post', () => {
 
   let wrapper
 
   beforeEach(() => {
+
     wrapper = mount(profile, { 
       localVue
     })
   })
 
-  test('click button', () => {
-
-    let mockFunc = jest.fn()
-
-    wrapper.setMethods({submitForm: mockFunc})
-    wrapper.find('button').trigger('click')
-    expect(mockFunc).toBeCalled()
+  test('test to judge form validation1', done => {
+    wrapper.vm.$refs['form'].validate((valid) => {
+      expect(valid).toBe(false)
+      done()
+    })
   })
+
+  test('test to judge form validation2', done => {
+    let inputs = wrapper.findAll('input')
+    inputs.at(0).setValue('hogefoo0711')
+    inputs.at(1).setValue('hogefoo0711')
+    wrapper.vm.$refs['form'].validate((valid) => {
+      expect(valid).toBe(true)
+      done()
+    })
+  })
+
 
 })
