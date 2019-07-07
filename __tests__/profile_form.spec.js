@@ -1,5 +1,5 @@
 import {mount, createLocalVue} from '@vue/test-utils'
-import profile from '../pages/profile'
+import ProfileForm from '../components/ProfileForm'
 import ElementUI from 'element-ui'
 
 const localVue = createLocalVue();
@@ -10,7 +10,7 @@ describe('validation test', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = mount(profile, { 
+    wrapper = mount(ProfileForm, { 
       localVue
     })
   })
@@ -37,7 +37,7 @@ describe('validation test', () => {
   })
 
   test('user id has to contain only alphabet or number', () => {
-    inputAndEvaluate(0, '@@', '.is-error')
+    inputAndEvaluate(0, 'aa@@', '.is-error')
   })
 
   test('valid name', () => {
@@ -67,19 +67,19 @@ describe('form value is correctly validated when post', () => {
 
   beforeEach(() => {
 
-    wrapper = mount(profile, { 
+    wrapper = mount(ProfileForm, { 
       localVue
     })
   })
 
-  test('test to judge form validation1', done => {
+  test('form validation test1', done => {
     wrapper.vm.$refs['form'].validate((valid) => {
       expect(valid).toBe(false)
       done()
     })
   })
 
-  test('test to judge form validation2', done => {
+  test('form validation test2', done => {
     let inputs = wrapper.findAll('input')
     inputs.at(0).setValue('hogefoo0711')
     inputs.at(1).setValue('hogefoo0711')
