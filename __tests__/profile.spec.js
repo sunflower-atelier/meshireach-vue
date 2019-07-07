@@ -79,4 +79,5 @@ describe('submit test', () => {
     wrapper.find('button').trigger('click')
     expect(mockFunc).toBeCalled()
   })
+
 })

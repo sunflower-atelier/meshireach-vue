@@ -67,23 +67,28 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
         if(valid){
-            let authHeaderBody = await makeAuthHeaderBody();
-            let res = await this.$axios.post('http://localhost:3000/profiles', {
-                searchID: this.form.searchID,
-                name: this.form.name,
-                message: this.form.message,
-              },{
-                headers: authHeaderBody
-              }).catch(() => {
-                this.$message.error('some error occurs try again')
-                return;
-              })
-            console.log(res)
+          await this.sendProfileToServer(this.form.searchID, this.form.name, this.form.message)
         }else{
+          console.log(valid)
           this.$message.error('input value is invalid')
         }
       })
+    },
+    async sendProfileToServer(searchID, name, message){
+      let authHeaderBody = await makeAuthHeaderBody();
+      let res = await this.$axios.post('http://localhost:3000/profiles', {
+          searchID: searchID,
+          name: name,
+          message: message,
+        },{
+          headers: authHeaderBody
+        }).catch(() => {
+          this.$message.error('some error occurs try again')
+          return;
+        })
+      console.log(res)
     }
+
   }
 }
 </script>
