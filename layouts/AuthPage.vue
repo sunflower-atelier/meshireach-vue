@@ -1,15 +1,13 @@
 <template>
   <el-container>
-    <el-header 
-      style="text-align: right; font-size: 12px">
+    <el-header>
       <el-dropdown
         @command="handleCommand">
         <i 
           class="el-icon-menu" 
           style="margin-right: 15px" />
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item
-            command="signout">
+          <el-dropdown-item command="signout">
             signout
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -105,6 +103,8 @@ html {
   background-color: #bcffdd;
   color: #333;
   line-height: 60px;
+  text-align: right; 
+  font-size: 12px;
 }
 </style>
 

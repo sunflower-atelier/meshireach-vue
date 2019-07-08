@@ -1,7 +1,7 @@
 import auth from './auth'
 
 
-async function makeAuthHeaderBody(){
+const makeAuthHeaderBody = async function(){
   let user = await auth();
   let idToken = await user.getIdToken(/* forceRefresh */ false)
   let sendMsg = 'Bearer ' +idToken
