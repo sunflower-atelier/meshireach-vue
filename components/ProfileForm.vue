@@ -18,9 +18,9 @@
           </el-form-item>
           <el-form-item 
             label="名前"
-            prop="name">
+            prop="userName">
             <el-input 
-              v-model="form.name" 
+              v-model="form.userName" 
               placeholder="your name"/>
           </el-form-item>
           <el-form-item label="ひとこと">
@@ -41,6 +41,7 @@
 
 <script>
 import makeAuthHeaderBody from '../plugins/id-token'
+import * as validation from '../util/validation'
 
 export default {
   layout : 'AuthPage',
@@ -48,17 +49,17 @@ export default {
     return {
       form: {
         searchID: '',
-        name: '',
+        userName: '',
         message: '',
       },
       rules: {
         searchID: [
           { required: true, message: 'Please input user id', trigger: 'blur' },
-          { pattern: /^[\d\w]+$/g, message: 'Plase input number or alphabet', trigger: 'blur'}
+          { pattern: validation.searchIDValidation, message: 'Plase input number or alphabet', trigger: 'blur'}
         ],
-        name: [
+        userName: [
           { required: true, message: 'Please input user name', trigger: 'blur' },
-          { pattern: /^[\d\w一-龠ぁ-んァ-ヶ]+$|^[\d\w一-龠ぁ-んァ-ヶ][\s\d\w一-龠ぁ-んァ-ヶ]*[\d\w一-龠ぁ-んァ-ヶ]$/u, message: 'Please input a string which does not begin/end with space', trigger: 'blur'}
+          { pattern: validation.userNameValidation, message: 'Please input a string which does not begin/end with space', trigger: 'blur'}
         ]
       }
     }
@@ -77,15 +78,15 @@ export default {
     async sendProfileToServer(searchID, name, message){
       let authHeaderBody = await makeAuthHeaderBody();
       let res = await this.$axios.post('http://localhost:3000/profiles', {
-          searchID: searchID,
-          name: name,
-          message: message,
-        },{
-          headers: authHeaderBody
-        }).catch(() => {
-          this.$message.error('some error occurs try again')
-          return;
-        })
+        searchID: searchID,
+        name: name,
+        message: message,
+      },{
+        headers: authHeaderBody
+      }).catch(() => {
+        this.$message.error('some error occurs try again')
+        return;
+      })
       console.log(res)
     }
   }
