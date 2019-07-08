@@ -7,10 +7,10 @@ localVue.use(ElementUI);
 
 describe('validation test', () => {
 
-  let wrapper
+  let profileFormWrapper
 
   beforeEach(() => {
-    wrapper = mount(ProfileForm, { 
+    profileFormWrapper = mount(ProfileForm, { 
       localVue
     })
   })
@@ -21,11 +21,11 @@ describe('validation test', () => {
    * @param {string} inputStr     inputに入力する文字列
    * @param {string} expectedClassName el-form-itemにつくclass名(.is-success or .is-error)
    */
-  let inputAndEvaluate = (inputIndex, inputStr, expectedClassName) => {
-    let inputs = wrapper.findAll('input')
+  const inputAndEvaluate = (inputIndex, inputStr, expectedClassName) => {
+    let inputs = profileFormWrapper.findAll('input')
     inputs.at(inputIndex).setValue(inputStr)
     inputs.at(inputIndex).trigger('blur')
-    expect(wrapper.find(expectedClassName).exists()).toBeTruthy()
+    expect(profileFormWrapper.find(expectedClassName).exists()).toBe(true)
   }
 
   test('valid user id', () => {
@@ -63,31 +63,29 @@ describe('validation test', () => {
 
 describe('form value is correctly validated when post', () => {
 
-  let wrapper
+  let profileFormWrapper
 
   beforeEach(() => {
 
-    wrapper = mount(ProfileForm, { 
+    profileFormWrapper = mount(ProfileForm, { 
       localVue
     })
   })
 
   test('form validation test1', done => {
-    wrapper.vm.$refs['form'].validate((valid) => {
+    profileFormWrapper.vm.$refs['form'].validate((valid) => {
       expect(valid).toBe(false)
       done()
     })
   })
 
   test('form validation test2', done => {
-    let inputs = wrapper.findAll('input')
+    let inputs = profileFormWrapper.findAll('input')
     inputs.at(0).setValue('hogefoo0711')
     inputs.at(1).setValue('hogefoo0711')
-    wrapper.vm.$refs['form'].validate((valid) => {
+    profileFormWrapper.vm.$refs['form'].validate((valid) => {
       expect(valid).toBe(true)
       done()
     })
   })
-
-
 })
