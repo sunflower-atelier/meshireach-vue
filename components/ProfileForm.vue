@@ -83,11 +83,16 @@ export default {
         message: message,
       },{
         headers: authHeaderBody
-      }).catch(() => {
+      }).catch((err) => {
         this.$message.error('some error occurs try again')
-        return;
+        return err.response;
       })
-      console.log(res)
+      if(res.status === 200){
+        const user = res.data
+        console.log(user)
+        this.$store.commit('profile/setCurrentUser', user)
+        this.$router.push('/')
+      }
     }
   }
 }
