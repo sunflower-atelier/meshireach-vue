@@ -19,7 +19,7 @@ export const mutations = {
 
 export const actions = {
   fetchUserFromAPIServer: async ({ commit }) => {
-    const res = await axios.get('localhost:3000/checkProfile')
+    const res = await axios.get('localhost:3000/profiles')
     if (res.stasus === 200) {
       const user = res.data
       commit('setCurrentUser', user)
