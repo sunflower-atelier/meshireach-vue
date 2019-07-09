@@ -10,7 +10,10 @@ export const getters = {
 
 export const mutations = {
   setCurrentUser: (argState, user) => {
-    argState.currentUser = user
+    argState.currentUser = {}
+    argState.currentUser.searchID = user.searchID
+    argState.currentUser.name = user.name
+    argState.currentUser.message = user.message
   }
 }
 

@@ -8,11 +8,13 @@ test('setCurrentUser() registers user', () => {
   const mockState = state()
   mutations.setCurrentUser(mockState, {
     name: 'test',
-    userID: 1
+    searchID: 1,
+    message: 'test'
   })
   expect(mockState.currentUser).toStrictEqual({
     name: 'test',
-    userID: 1
+    searchID: 1,
+    message: 'test'
   })
 })
 
@@ -20,10 +22,12 @@ test('getCurrentUser() returns user after setting', () => {
   const mockState = state()
   mutations.setCurrentUser(mockState, {
     name: 'test',
-    userID: 1
+    searchID: 1,
+    message: 'test'
   })
   expect(getters.getCurrentUser(mockState)).toStrictEqual({
     name: 'test',
-    userID: 1
+    searchID: 1,
+    message: 'test'
   })
 })
