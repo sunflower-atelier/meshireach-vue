@@ -68,7 +68,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {
         if(valid){
-          await this.sendProfileToServer(this.form.searchID, this.form.name, this.form.message)
+          await this.sendProfileToServer(this.form.searchID, this.form.userName, this.form.message)
         }else{
           console.log(valid)
           this.$message.error('input value is invalid')
@@ -79,7 +79,7 @@ export default {
       let authHeaderBody = await makeAuthHeaderBody();
       let res = await this.$axios.post('http://localhost:3000/profiles', {
         searchID: searchID,
-        name: userName,
+        name: name,
         message: message,
       },{
         headers: authHeaderBody
