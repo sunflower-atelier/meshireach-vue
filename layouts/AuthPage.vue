@@ -12,7 +12,9 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>Tom</span>
+      <span v-if="$store.state.profile.currentUser">
+        {{ $store.state.profile.currentUser.name }}({{ $store.state.profile.currentUser.searchID }})
+      </span>
     </el-header>
     <el-main>
       <nuxt/>
@@ -44,6 +46,7 @@ export default{
     },
     async signout(){
       await firebase.auth().signOut().then(() => {
+        this.$store.commit('profile/setCurrentUser', null)
         this.$router.push('/login')
       }).catch(() => {
         this.$message.error('you cannot logout')
