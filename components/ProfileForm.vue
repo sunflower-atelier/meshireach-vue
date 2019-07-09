@@ -79,7 +79,7 @@ export default {
       let authHeaderBody = await makeAuthHeaderBody();
       let res = await this.$axios.post('http://localhost:3000/profiles', {
         searchID: searchID,
-        name: name,
+        name: userName,
         message: message,
       },{
         headers: authHeaderBody
