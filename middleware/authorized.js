@@ -8,11 +8,11 @@ export default async function ({ store, route, redirect }) {
   }
 
   let storedUserInfo = null
-  // storeからユーザ情報を取得する関数
+  // storeからprofileを取得
   storedUserInfo = store.getters['profile/getCurrentUser']
   // storedUserInfo = true
   if(!storedUserInfo){
-    // apiサーバーからユーザを取得する関数
+    // apiサーバーからprofileを取得
     await store.dispatch('profile/fetchUserFromAPIServer')
     storedUserInfo = store.getters['profile/getCurrentUser']
   }
