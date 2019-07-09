@@ -1,19 +1,23 @@
 import auth from '../plugins/auth'
 
-export default async function ({ route, redirect }) {
+export default async function ({ store, route, redirect }) {
 
   let firebaseUser = await auth();
   if(!firebaseUser){
     return redirect('/login')
   }
 
-  let storedUserInfo = null;
+  let storedUserInfo = null
   // storeからユーザ情報を取得する関数
-  // storedUserInfo = getUserFromStore()
+  storedUserInfo = store.getters['profile/getCurrentUser']
+  // storedUserInfo = true
   if(!storedUserInfo){
     // apiサーバーからユーザを取得する関数
-    // storedUserInfo = getUserFromServer()
+    await store.dispatch('profile/fetchUserFromAPIServer')
+    storedUserInfo = store.getters['profile/getCurrentUser']
   }
+
+  console.log(storedUserInfo)
 
   // profile登録が済んでいない場合はprofileページに飛ぶ
   if(!storedUserInfo && route.name != 'profile'){
