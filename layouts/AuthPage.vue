@@ -12,8 +12,8 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span v-if="$store.state.profile.currentUser">
-        {{ $store.state.profile.currentUser.name }}({{ $store.state.profile.currentUser.searchID }})
+      <span v-if="currentUser">
+        {{ currentUser.name }}({{ currentUser.searchID }})
       </span>
     </el-header>
     <el-main>
@@ -36,6 +36,11 @@ Vue.use(ElementUI, {locale});
 
 export default{
   middleware: 'authorized',
+  computed: {
+    currentUser(){
+      return this.$store.state.profile.currentUser
+    }
+  },
   methods: {
     async handleCommand(command){
       switch(command){
@@ -46,7 +51,7 @@ export default{
     },
     async signout(){
       await firebase.auth().signOut().then(() => {
-        this.$store.commit('profile/setCurrentUser', null)
+        this.$store.commit('profile/clearCurrentUser', null)
         this.$router.push('/login')
       }).catch(() => {
         this.$message.error('you cannot logout')

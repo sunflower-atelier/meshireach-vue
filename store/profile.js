@@ -15,6 +15,9 @@ export const mutations = {
     argState.currentUser.searchID = user.searchID
     argState.currentUser.name = user.name
     argState.currentUser.message = user.message
+  },
+  clearCurrentUser: (argState) => {
+    argState.currentUser = null
   }
 }
 
