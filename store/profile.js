@@ -27,7 +27,6 @@ export const actions = {
     const res = await axios.get('http://localhost:3000/profiles', {
       headers: authHeaderBody
     }).catch((err) => {
-      console.log(err.response.data)
       return err.response
     })
     if (res.status === 200) {
