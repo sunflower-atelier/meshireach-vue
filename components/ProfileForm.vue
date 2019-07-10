@@ -87,9 +87,8 @@ export default {
         this.$message.error('some error occurs try again')
         return err.response;
       })
-      if(res.status === 200){
+      if(res.status === 201){
         const user = res.data
-        console.log(user)
         this.$store.commit('profile/setCurrentUser', user)
         this.$router.push('/')
       }

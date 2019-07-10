@@ -1,9 +1,16 @@
 import {mount, createLocalVue} from '@vue/test-utils'
 import ProfileForm from '../components/ProfileForm'
+import Vuex from 'vuex'
 import ElementUI from 'element-ui'
+import axios from "axios"
+import MockAdapter from "axios-mock-adapter"
+import makeAuthHeaderBody from '../plugins/id-token'
 
 const localVue = createLocalVue();
 localVue.use(ElementUI);
+localVue.use(Vuex)
+jest.mock('../plugins/id-token')
+makeAuthHeaderBody.mockResolvedValue({})
 
 describe('validation test', () => {
 
@@ -88,4 +95,45 @@ describe('form value is correctly validated when post', () => {
       done()
     })
   })
+})
+
+describe('post profile test', () => {
+
+  let profileFormWrapper
+  let axiosMock
+  let mutations
+
+  const router = { push: jest.fn() }
+
+  beforeEach(() => {
+    mutations = {
+      setCurrentUser: jest.fn(),
+    }
+    const store = new Vuex.Store({
+      modules:{
+        profile:{
+          namespaced: true,
+          mutations
+        }
+      }
+    })
+    profileFormWrapper = mount(ProfileForm, { 
+      localVue,
+      mocks: { $router: router, $store: store, $axios: axios}
+    })
+    axiosMock = new MockAdapter(axios)
+  })
+
+  test('setCurrentUser will be invoked if response code is 200', async () => {
+    axiosMock.onPost('http://localhost:3000/profiles').reply(201)
+    await profileFormWrapper.vm.sendProfileToServer("searchID", "name", "message")
+    expect(mutations.setCurrentUser).toHaveBeenCalled()
+  })
+
+  test('setCurrentUser will not be invoked if response code is 200', async () => {
+    axiosMock.onPost('http://localhost:3000/profiles').reply(400)
+    await profileFormWrapper.vm.sendProfileToServer("searchID", "name", "message")
+    expect(mutations.setCurrentUser).not.toHaveBeenCalled()
+  })
+
 })
