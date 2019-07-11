@@ -8,6 +8,7 @@
           :model="form" 
           :rules="rules" 
           status-icon 
+          label-position="top"
           label-width="120px">
           <el-form-item 
             label="ユーザーID" 
@@ -54,11 +55,11 @@ export default {
       },
       rules: {
         searchID: [
-          { required: true, message: 'Please input user id', trigger: 'blur' },
-          { pattern: validation.searchIDValidation, message: 'Plase input number or alphabet', trigger: 'blur'}
+          { required: true, message: 'input user id', trigger: 'blur' },
+          { pattern: validation.searchIDValidation, message: 'input digit or word charactor', trigger: 'blur'}
         ],
         userName: [
-          { required: true, message: 'Please input user name', trigger: 'blur' },
+          { required: true, message: 'input user name', trigger: 'blur' },
           { pattern: validation.userNameValidation, message: 'Please input a string which does not begin/end with space', trigger: 'blur'}
         ]
       }
