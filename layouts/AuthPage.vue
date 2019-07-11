@@ -2,6 +2,7 @@
   <el-container>
     <el-header>
       <el-dropdown
+        trigger="click"
         @command="handleCommand">
         <i 
           class="el-icon-menu" 
