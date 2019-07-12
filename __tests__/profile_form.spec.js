@@ -29,7 +29,7 @@ describe('validation test', () => {
    * @param {string} expectedClassName el-form-itemにつくclass名(.is-success or .is-error)
    */
   const inputAndEvaluate = (inputIndex, inputStr, expectedClassName) => {
-    let inputs = profileFormWrapper.findAll('input')
+    const inputs = profileFormWrapper.findAll('input')
     inputs.at(inputIndex).setValue(inputStr)
     inputs.at(inputIndex).trigger('blur')
     expect(profileFormWrapper.find(expectedClassName).exists()).toBe(true)
@@ -87,7 +87,7 @@ describe('form value is correctly validated when post', () => {
   })
 
   test('form validation test2', done => {
-    let inputs = profileFormWrapper.findAll('input')
+    const inputs = profileFormWrapper.findAll('input')
     inputs.at(0).setValue('hogefoo0711')
     inputs.at(1).setValue('hogefoo0711')
     profileFormWrapper.vm.$refs['form'].validate((valid) => {

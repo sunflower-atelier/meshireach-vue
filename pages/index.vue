@@ -39,8 +39,8 @@ export default {
   },
   methods:{
     async sendPrivate(){
-      let authHeader = await makeAuthHeaderBody();
-      let res = await this.$axios.get('http://localhost:3000/private' ,{
+      const authHeader = await makeAuthHeaderBody();
+      const res = await this.$axios.get('http://localhost:3000/private' ,{
         headers: authHeader
       })
       console.log(res)
