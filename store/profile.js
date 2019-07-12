@@ -1,4 +1,5 @@
-import axios from '@nuxtjs/axios'
+import axios from 'axios'
+import makeAuthHeaderBody from '../plugins/id-token'
 
 export const state = () => ({
   currentUser: null
@@ -14,13 +15,21 @@ export const mutations = {
     argState.currentUser.searchID = user.searchID
     argState.currentUser.name = user.name
     argState.currentUser.message = user.message
+  },
+  clearCurrentUser: (argState) => {
+    argState.currentUser = null
   }
 }
 
 export const actions = {
   fetchUserFromAPIServer: async ({ commit }) => {
-    const res = await axios.get('localhost:3000/profiles')
-    if (res.stasus === 200) {
+    const authHeaderBody = await makeAuthHeaderBody();
+    const res = await axios.get('http://localhost:3000/profiles', {
+      headers: authHeaderBody
+    }).catch((err) => {
+      return err.response
+    })
+    if (res.status === 200) {
       const user = res.data
       commit('setCurrentUser', user)
     }
