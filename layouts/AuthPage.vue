@@ -1,14 +1,12 @@
 <template>
   <el-container>
     <el-header>
-      <el-dropdown
-        trigger="click"
-        @command="handleCommand">
+      <el-dropdown trigger="click">
         <i 
           class="el-icon-menu" 
           style="margin-right: 15px" />
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="signout">
+          <el-dropdown-item @click.native="signout">
             signout
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -43,13 +41,6 @@ export default{
     }
   },
   methods: {
-    async handleCommand(command){
-      switch(command){
-        case 'signout':
-          await this.signout();
-          break;
-      }
-    },
     async signout(){
       await firebase.auth().signOut().then(() => {
         this.$store.commit('profile/clearCurrentUser', null)
