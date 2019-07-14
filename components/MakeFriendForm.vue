@@ -44,22 +44,25 @@ export default {
     async submitForm(formName){
       this.$refs[formName].validate(async (valid) => {
         if(valid){
-            const authHeaderBody = await makeAuthHeaderBody()
-            const res = await this.$axios.post('http://localhost:3000/friendrelation', {
-            friendID: this.makeFriendForm.friendID,
-          },{
-            headers: authHeaderBody
-          }).catch((err) => {
-            this.$message.error('some error occurs try again')
-            return err.response;
-          })
-          if(res.status == 201){
-            this.$message.success(this.makeRelationForm.friendID+' become your friend')
-          }
+          this.postMakeFriendRelation(this.makeFriendForm.friendID)
         }else{
          this.$message.error('input value is invalid')
         }
       })
+    },
+    async postMakeFriendRelation(friendID){
+      const authHeaderBody = await makeAuthHeaderBody()
+      const res = await this.$axios.post('http://localhost:3000/friendrelation', {
+        friendID: friendID,
+      },{
+        headers: authHeaderBody
+      }).catch((err) => {
+        this.$message.error('some error occurs try again')
+        return err.response;
+      })
+      if(res.status == 201){
+        this.$message.success(this.makeRelationForm.friendID+' become your friend')
+      }
     }
   },
 }
