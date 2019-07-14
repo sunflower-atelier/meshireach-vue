@@ -24,18 +24,21 @@
         @click="sendPrivate">
         send private
       </el-button>
+      <friend-form/>      
     </div>
   </section>
 </template>
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
+import FriendForm from '../components/FriendForm' 
 import makeAuthHeaderBody from '../plugins/id-token'
 
 export default {
   layout : 'AuthPage',
   components: {
-    AppLogo
+    AppLogo,
+    FriendForm
   },
   methods:{
     async sendPrivate(){
