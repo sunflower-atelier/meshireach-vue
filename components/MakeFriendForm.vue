@@ -26,6 +26,7 @@
 
 <script>
 import makeAuthHeaderBody from '../plugins/id-token'
+import { searchIDValidation } from '../util/validation'
 
 export default {
   data(){
@@ -36,12 +37,14 @@ export default {
       rules:{
         friendID:[
           { required: true, message: 'input user id', trigger: 'blur' },
+          { pattern: searchIDValidation, message: 'user id contains only digit or word charactor', trigger: 'blur'}
         ]
       }
     }
   },
   methods: {
     async submitForm(formName){
+      console.log(searchIDValidation)
       this.$refs[formName].validate(async (valid) => {
         if(valid){
           this.postMakeFriendRelation(this.makeFriendForm.friendID)
