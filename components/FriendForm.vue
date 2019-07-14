@@ -1,7 +1,7 @@
 <template>
   <el-form
-    ref="makeFriendForm"
-    :model="makeFriendForm"
+    ref="friendForm"
+    :model="friendForm"
     :rules="rules"
     status-icon
     label-position="top"
@@ -11,13 +11,13 @@
       label="ユーザID"
       prop="friendID">
       <el-input 
-        v-model="makeFriendForm.friendID" 
+        v-model="friendForm.friendID" 
         placeholder="user id"/>
     </el-form-item>
     <el-form-item>
       <el-button
         type="primary" 
-        @click="submitForm('makeFriendForm')">
+        @click="submitForm('friendForm')">
         送信
       </el-button>
     </el-form-item>
@@ -31,7 +31,7 @@ import { searchIDValidation } from '../util/validation'
 export default {
   data(){
     return {
-      makeFriendForm:{
+      friendForm:{
         friendID: ''
       },
       rules:{
@@ -44,16 +44,15 @@ export default {
   },
   methods: {
     async submitForm(formName){
-      console.log(searchIDValidation)
       this.$refs[formName].validate(async (valid) => {
         if(valid){
-          this.postMakeFriendRelation(this.makeFriendForm.friendID)
+          await this.postFriendRelation(this.friendForm.friendID)
         }else{
          this.$message.error('input value is invalid')
         }
       })
     },
-    async postMakeFriendRelation(friendID){
+    async postFriendRelation(friendID){
       const authHeaderBody = await makeAuthHeaderBody()
       const res = await this.$axios.post('http://localhost:3000/friendrelation', {
         friendID: friendID,

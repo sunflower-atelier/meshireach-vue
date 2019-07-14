@@ -1,21 +1,19 @@
 import {mount, createLocalVue} from '@vue/test-utils'
-import MakeFriendForm from '../components/MakeFriendForm'
+import FriendForm from '../components/FriendForm'
 import Vuex from 'vuex'
 import ElementUI from 'element-ui'
-import makeAuthHeaderBody from '../plugins/id-token'
 
 const localVue = createLocalVue();
 localVue.use(ElementUI);
 localVue.use(Vuex)
 jest.mock('../plugins/id-token')
-makeAuthHeaderBody.mockResolvedValue({})
 
 describe('validation test', () => {
 
-  let makeFriendFormWrapper
+  let friendFormWrapper
 
   beforeEach(() => {
-    makeFriendFormWrapper = mount(MakeFriendForm, {
+    friendFormWrapper = mount(FriendForm, {
       localVue,
     })
   })
@@ -27,9 +25,9 @@ describe('validation test', () => {
    * @param {*} done jestにテストの終了を通知するdoneコールバック
    */
   const checkInputValue = (inputValue, isValid, done) => {
-    const input = makeFriendFormWrapper.find('input')
+    const input = friendFormWrapper.find('input')
     input.setValue(inputValue)
-    makeFriendFormWrapper.vm.$refs['makeFriendForm'].validate((valid) => {
+    friendFormWrapper.vm.$refs['friendForm'].validate((valid) => {
       expect(valid).toBe(isValid)
       done()
     })
