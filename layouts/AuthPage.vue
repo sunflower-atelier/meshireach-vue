@@ -85,7 +85,7 @@ export default{
     userSetting(){
       this.$message.success('user setting')
     }
-  },
+  }
 }
 </script>
 
