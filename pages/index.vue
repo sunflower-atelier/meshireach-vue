@@ -15,14 +15,10 @@
 </template>
 
 <script>
-import FriendForm from '../components/FriendForm' 
 import makeAuthHeaderBody from '../plugins/id-token'
 
 export default {
   layout : 'AuthPage',
-  components: {
-    FriendForm
-  },
   methods:{
     async sendPrivate(){
       const authHeader = await makeAuthHeaderBody();

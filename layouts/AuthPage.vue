@@ -17,6 +17,11 @@
             <i class="el-icon-user"/>
             make friend
           </el-menu-item>
+          <el-dialog 
+            :visible.sync="friendFormVisible"
+            title="input your friend's id" >
+            <friend-form/>
+          </el-dialog>
           <el-menu-item @click="userSetting">
             <i class="el-icon-setting"/>
             user setting
@@ -43,11 +48,20 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/ja'
 
 import firebase from '../plugins/firebase'
+import FriendForm from '../components/FriendForm' 
 
 Vue.use(ElementUI, {locale});
 
 export default{
   middleware: 'authorized',
+  components: {
+    FriendForm
+  },
+  data(){
+    return {
+      friendFormVisible: false,
+    }
+  },
   computed: {
     currentUser(){
       return this.$store.state.profile.currentUser
@@ -66,7 +80,7 @@ export default{
       this.$message.success('meshi is created')
     },
     makeFriend(){
-      this.$message.success('make friend')
+      this.friendFormVisible = true
     },
     userSetting(){
       this.$message.success('user setting')
