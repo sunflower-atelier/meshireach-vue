@@ -20,7 +20,7 @@
           <el-dialog 
             :visible.sync="friendFormVisible"
             title="input your friend's id" >
-            <friend-form/>
+            <friend-form @success-friend-make="friendFormVisible = false"/>
           </el-dialog>
           <el-menu-item @click="userSetting">
             <i class="el-icon-setting"/>
