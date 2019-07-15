@@ -1,15 +1,5 @@
 <template>
   <div id="top-view-wrapper">
-    <p 
-      id="user-name" 
-      class="profile-text">
-      {{ this.$store.state.profile.currentUser.name }}
-    </p>
-    <p 
-      id="user-id" 
-      class="profile-text">
-      ID: {{ this.$store.state.profile.currentUser.searchID }}
-    </p>
     <el-tabs stretch>
       <el-tab-pane label="ダチのめし募集">
         めしりすと
@@ -19,9 +9,6 @@
       </el-tab-pane>
       <el-tab-pane label="ダチリスト">
         だちのりすと
-      </el-tab-pane>
-      <el-tab-pane label="ダチの追加">
-        <friend-form/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -54,23 +41,6 @@ export default {
   margin-top: 15px;
   margin-left: auto;
   margin-right: auto;
-}
-#user-name{
-  font-size: 24px;
-  font-weight: bold;
-}
-#user-id{
-  font-size: 18px;
-  color: #a9a9a9;
-}
-#user-message{
-  margin-top: 20px;
-}
-.profile-text{
-  padding-left: 20px;
-}
-.el-tabs{
-  margin-top: 20px;
 }
 .el-tab-pane{
   padding: 10px 15px 10px 15px;
