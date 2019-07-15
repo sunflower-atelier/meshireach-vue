@@ -8,14 +8,9 @@
     <p 
       id="user-id" 
       class="profile-text">
-      {{ this.$store.state.profile.currentUser.searchID }}
+      ID: {{ this.$store.state.profile.currentUser.searchID }}
     </p>
-    <p 
-      id="user-message" 
-      class="profile-text">
-      {{ this.$store.state.profile.currentUser.message }}
-    </p>
-    <el-tabs stretch="true">
+    <el-tabs stretch>
       <el-tab-pane label="ダチのめし募集">
         めしりすと
       </el-tab-pane>
