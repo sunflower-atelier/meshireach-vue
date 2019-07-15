@@ -11,9 +11,6 @@
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span v-if="currentUser">
-        {{ currentUser.name }}({{ currentUser.searchID }})
-      </span>
     </el-header>
     <el-main>
       <nuxt/>

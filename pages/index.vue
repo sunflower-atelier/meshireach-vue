@@ -1,43 +1,44 @@
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        meshireach
-      </h1>
-      <h2 class="subtitle">
-        View of meshireach
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-      <el-button
-        type="primary"
-        size="medium"
-        @click="sendPrivate">
-        send private
-      </el-button>
-      <friend-form/>      
-    </div>
-  </section>
+  <div id="top-view-wrapper">
+    <p 
+      id="user-name" 
+      class="profile-text">
+      {{ this.$store.state.profile.currentUser.name }}
+    </p>
+    <p 
+      id="user-id" 
+      class="profile-text">
+      {{ this.$store.state.profile.currentUser.searchID }}
+    </p>
+    <p 
+      id="user-message" 
+      class="profile-text">
+      {{ this.$store.state.profile.currentUser.message }}
+    </p>
+    <el-tabs stretch="true">
+      <el-tab-pane label="ダチのめし募集">
+        めしりすと
+      </el-tab-pane>
+      <el-tab-pane label="自分のめし募集">
+        じぶんのめしりすと
+      </el-tab-pane>
+      <el-tab-pane label="ダチリスト">
+        だちのりすと
+      </el-tab-pane>
+      <el-tab-pane label="ダチの追加">
+        <friend-form/>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
 import FriendForm from '../components/FriendForm' 
 import makeAuthHeaderBody from '../plugins/id-token'
 
 export default {
   layout : 'AuthPage',
   components: {
-    AppLogo,
     FriendForm
   },
   methods:{
@@ -53,33 +54,31 @@ export default {
 </script>
 
 <style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+#top-view-wrapper {
+  max-width : 800px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
+#user-name{
+  font-size: 24px;
+  font-weight: bold;
 }
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+#user-id{
+  font-size: 18px;
+  color: #a9a9a9;
 }
-
-.links {
-  padding-top: 15px;
+#user-message{
+  margin-top: 20px;
+}
+.profile-text{
+  padding-left: 20px;
+}
+.el-tabs{
+  margin-top: 20px;
+}
+.el-tab-pane{
+  padding: 10px 15px 10px 15px;
 }
 </style>
 
