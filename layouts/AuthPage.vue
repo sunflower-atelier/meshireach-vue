@@ -13,6 +13,11 @@
             <i class="el-icon-dish"/>
             <span>make meshi</span>
           </el-menu-item>
+          <el-dialog 
+            :visible.sync="eventFormVisible"
+            title="input meshi detail" >
+            <event-form/>
+          </el-dialog>
           <el-menu-item @click="makeFriend">
             <i class="el-icon-user"/>
             make friend
@@ -49,17 +54,20 @@ import locale from 'element-ui/lib/locale/lang/ja'
 
 import firebase from '../plugins/firebase'
 import FriendForm from '../components/FriendForm' 
+import EventForm from '../components/EventForm' 
 
 Vue.use(ElementUI, {locale});
 
 export default{
   middleware: 'authorized',
   components: {
+    EventForm,
     FriendForm
   },
   data(){
     return {
       friendFormVisible: false,
+      eventFormVisible: false
     }
   },
   computed: {
@@ -77,7 +85,7 @@ export default{
       })
     },
     makeMeshi(){
-      this.$message.success('meshi is created')
+      this.eventFormVisible = true
     },
     makeFriend(){
       this.friendFormVisible = true
