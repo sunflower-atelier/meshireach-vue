@@ -1,7 +1,7 @@
 <template>
   <el-form
-    ref="meshiForm"
-    :model="meshiForm"
+    ref="eventForm"
+    :model="eventForm"
     :rules="rules"
     status-icon
     label-position="top"
@@ -11,31 +11,40 @@
       label="title"
       prop="title">
       <el-input 
-        v-model="meshiForm.title" 
-        placeholder="user id"/>
-    </el-form-item>
-
-    <el-form-item 
-      label="date"
-      prop="date">
-      <el-date-picker
-        v-model="meshiForm.date" 
-        :picker-options="datePickerOptions"
-        placeholder="Select a date"/>
+        v-model="eventForm.title" 
+        placeholder="input title"/>
     </el-form-item>
 
     <el-form-item 
       label="time"
-      prop="time">
-      <el-time-select
-        v-model="meshiForm.time" 
-        :picker-options="timePickerOptions"
-        placeholder="Select time"/>
+      required>
+      <el-col :span="11">
+        <el-form-item prop="date">
+          <el-date-picker
+            v-model="eventForm.date" 
+            :picker-options="datePickerOptions"
+            value-format="yyyy/MM/dd"
+            placeholder="Pick a date"/>
+        </el-form-item>
+      </el-col>
+      <el-col 
+        :span="2"
+        class="line">
+        -
+      </el-col>
+      <el-col :span="11">
+        <el-form-item prop="time">
+          <el-time-select
+            v-model="eventForm.time" 
+            :picker-options="timePickerOptions"
+            placeholder="Pick a time"/>
+        </el-form-item>
+      </el-col>
     </el-form-item>
 
     <el-button
       type="primary" 
-      @click="submitForm('meshiForm')">
+      @click="submitForm('eventForm')">
       送信
     </el-button>
   </el-form>
@@ -45,6 +54,38 @@
 
 export default {
   data(){
+    const validateDate = (rules, value, callback) => {
+      if(value !== ''){
+        if(this.eventForm.time !== ''){
+          this.$refs.eventForm.validateField('time')
+        }
+        callback()
+      }else{
+        callback(new Error('pick a date'))
+      }
+    }
+    const validateTime = (rules, value, callback) => {
+      if(value === ''){
+        callback(new Error('pick a date'))
+        return
+      }
+      
+      if(this.eventForm.date ===  ''){
+        callback()
+        return
+      }
+
+      const now = new Date()
+      const inputDate = new Date(this.eventForm.date+' '+value)
+
+      if(now < inputDate){
+        callback()
+        return
+      }
+
+      callback(new Error('pick future'))
+      return
+    }
     return {
       datePickerOptions: {
         disabledDate(time){
@@ -59,21 +100,21 @@ export default {
         start: '00:00',
         end: '23:30'
       },
-      meshiForm:{
+      eventForm:{
         title: '',
-        date: null,
-        time: null
+        date: '',
+        time: ''
       },
       rules:{
         title:[
           { required: true, message: 'input title', trigger: 'blur' }
         ],
         date:[
-          { required: true, message: 'input date', trigger: 'blur' }
+          { validator: validateDate, trigger: 'blur' }
         ],
         time:[
-          { required: true, message: 'input time', trigger: 'blur' }
-        ] 
+          { validator: validateTime, trigger: 'blur' }
+        ]
       }
     }
   },
@@ -92,4 +133,10 @@ export default {
 </script>
 
 <style>
+.line{
+  text-align: center;
+}
+.el-date-editor.el-input, .el-date-editor.el-input__inner{
+  width: 100%;
+}
 </style>
