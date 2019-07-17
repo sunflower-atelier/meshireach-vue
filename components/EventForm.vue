@@ -36,7 +36,7 @@
           <el-time-select
             v-model="eventForm.time"
             :picker-options="timePickerOptions"
-            placeholder="Pick a time"/>
+            placeholder="Select time"/>
         </el-form-item>
       </el-col>
     </el-form-item>
@@ -56,37 +56,43 @@ import makeAuthHeaderBody from '../plugins/id-token'
 export default {
   data(){
     const validateDate = (rules, value, callback) => {
-      if(value !== ''){
-        if(this.eventForm.time !== ''){
-          this.$refs.eventForm.validateField('time')
-        }
-        callback()
-      }else{
-        callback(new Error('pick a date'))
-      }
-    }
-    const validateTime = (rules, value, callback) => {
       if(value === ''){
         callback(new Error('pick a date'))
         return
       }
 
-      if(this.eventForm.date ===  ''){
+      const today = moment({hour:0, mninute:0, seconds:0, milliseconds:0})
+      const inputDate = moment(value, 'YYYY-MM-DD')
+      if(today > inputDate){
+        callback(new Error('pick future date'))
+        return
+      }
+
+      if(this.eventForm.time !== ''){
+        this.$refs.eventForm.validateField('time')
+      }
+      callback()
+    }
+    const validateTime = (rules, value, callback) => {
+      if(value === ''){
+        callback(new Error('select time'))
+        return
+      }
+
+      if(this.eventForm.date === ''){
         callback()
         return
       }
 
       const now = moment()
       const inputDate = moment(this.eventForm.date+' '+value, 'YYYY-MM-DD HH:mm')
-      console.log('time bockan')
-      console.log(inputDate.format('YYYY-MM-DD'))
 
       if(now < inputDate){
         callback()
         return
       }
 
-      callback(new Error('pick future'))
+      callback(new Error('select future time'))
       return
     }
     return {
