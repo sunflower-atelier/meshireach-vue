@@ -23,7 +23,7 @@
           <el-date-picker
             v-model="eventForm.date" 
             :picker-options="datePickerOptions"
-            value-format="yyyy/MM/dd"
+            value-format="yyyy-MM-dd"
             placeholder="Pick a date"/>
         </el-form-item>
       </el-col>
@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+import makeAuthHeaderBody from '../plugins/id-token'
 
 export default {
   data(){
@@ -69,14 +71,16 @@ export default {
         callback(new Error('pick a date'))
         return
       }
-      
+
       if(this.eventForm.date ===  ''){
         callback()
         return
       }
 
-      const now = new Date()
-      const inputDate = new Date(this.eventForm.date+' '+value)
+      const now = moment()
+      const inputDate = moment(this.eventForm.date+' '+value, 'YYYY-MM-DD HH:mm')
+      console.log('time bockan')
+      console.log(inputDate.format('YYYY-MM-DD'))
 
       if(now < inputDate){
         callback()
@@ -89,9 +93,8 @@ export default {
     return {
       datePickerOptions: {
         disabledDate(time){
-          const today = new Date()
-          today.setHours(0, 0, 0, 0)
-          return time.getTime() < today.getTime() || time.getTime() > today.getTime() + 3600 * 24 * 1000 * 3
+          const today = moment({hour:0, mninute:0, seconds:0, milliseconds:0})
+          return time.getTime() < today.toDate().getTime() || time.getTime() > today.toDate().getTime() + 3600 * 24 * 1000 * 3
         }
       },
       timePickerOptions: {
@@ -122,10 +125,27 @@ export default {
     async submitForm(formName){
       this.$refs[formName].validate(async (valid) => {
         if(valid){
-          console.log("post")
+          this.$refs[formName].validate(async (valid) => {
+          if(valid){
+            await this.postEvent()
+          }else{
+          this.$message.error('input value is invalid')
+          }
+        })
         }else{
          this.$message.error('input value is invalid')
         }
+      })
+    },
+    async postEvent(){
+      const authHeaderBody = await makeAuthHeaderBody()
+      const deadline = moment(this.eventForm.date+' '+this.eventForm.time, 'YYY-MM-DD HH:mm')
+      const title = this.eventForm.title
+      const res = await this.$axios.post('http://localhost:3000/event'), {
+        title: title,
+        deadline: ''
+      },{
+        headers: authHeaderBody
       })
     }
   }
