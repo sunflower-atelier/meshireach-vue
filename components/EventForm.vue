@@ -6,43 +6,42 @@
     status-icon
     label-position="top"
     label-width="120px">
-
     <el-form-item 
-      label="title"
+      label="title" 
       prop="title">
       <el-input 
         v-model="eventForm.title" 
-        placeholder="input title"/>
+        placeholder="input title" />
     </el-form-item>
 
     <el-form-item 
-      label="time"
+      label="time" 
       required>
       <el-col :span="11">
         <el-form-item prop="date">
           <el-date-picker
-            v-model="eventForm.date" 
+            v-model="eventForm.date"
             :picker-options="datePickerOptions"
             value-format="yyyy-MM-dd"
             placeholder="Pick a date"/>
         </el-form-item>
       </el-col>
       <el-col 
-        :span="2"
+        :span="2" 
         class="line">
         -
       </el-col>
       <el-col :span="11">
         <el-form-item prop="time">
           <el-time-select
-            v-model="eventForm.time" 
+            v-model="eventForm.time"
             :picker-options="timePickerOptions"
             placeholder="Pick a time"/>
         </el-form-item>
       </el-col>
     </el-form-item>
 
-    <el-button
+    <el-button 
       type="primary" 
       @click="submitForm('eventForm')">
       送信
@@ -141,22 +140,31 @@ export default {
       const authHeaderBody = await makeAuthHeaderBody()
       const deadline = moment(this.eventForm.date+' '+this.eventForm.time, 'YYY-MM-DD HH:mm')
       const title = this.eventForm.title
-      const res = await this.$axios.post('http://localhost:3000/event'), {
+      const res = await this.$axios.post('http://localhost:3000/event', {
         title: title,
-        deadline: ''
+        deadline: deadline.format('YYYY-MM-DD-HH-mm')
       },{
         headers: authHeaderBody
+      }).catch((err) => {
+        this.$message.error('some error occurs try again')
+        return err.response;
       })
+
+      if(res.status === 201){
+        this.$message.success('new event created')
+        this.$emit('success-event-make')
+      }
     }
   }
 }
 </script>
 
 <style>
-.line{
+.line {
   text-align: center;
 }
-.el-date-editor.el-input, .el-date-editor.el-input__inner{
+.el-date-editor.el-input,
+.el-date-editor.el-input__inner {
   width: 100%;
 }
 </style>

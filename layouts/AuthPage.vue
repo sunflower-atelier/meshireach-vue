@@ -16,7 +16,7 @@
           <el-dialog 
             :visible.sync="eventFormVisible"
             title="input meshi detail" >
-            <event-form/>
+            <event-form @success-event-make="eventFormVisible = false"/>
           </el-dialog>
           <el-menu-item @click="makeFriend">
             <i class="el-icon-user"/>
