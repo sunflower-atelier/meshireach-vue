@@ -3,8 +3,8 @@ import EventForm from '../components/EventForm'
 import ElementUI from 'element-ui'
 import moment from 'moment'
 
-const localVue = createLocalVue();
-localVue.use(ElementUI);
+const localVue = createLocalVue()
+localVue.use(ElementUI)
 
 describe("validation test" , () => {
 

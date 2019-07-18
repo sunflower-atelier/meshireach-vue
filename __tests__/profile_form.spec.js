@@ -6,8 +6,8 @@ import axios from "axios"
 import MockAdapter from "axios-mock-adapter"
 import makeAuthHeaderBody from '../plugins/id-token'
 
-const localVue = createLocalVue();
-localVue.use(ElementUI);
+const localVue = createLocalVue()
+localVue.use(ElementUI)
 localVue.use(Vuex)
 jest.mock('../plugins/id-token')
 makeAuthHeaderBody.mockResolvedValue({})

@@ -3,8 +3,8 @@ import FriendForm from '../components/FriendForm'
 import Vuex from 'vuex'
 import ElementUI from 'element-ui'
 
-const localVue = createLocalVue();
-localVue.use(ElementUI);
+const localVue = createLocalVue()
+localVue.use(ElementUI)
 localVue.use(Vuex)
 jest.mock('../plugins/id-token')
 
