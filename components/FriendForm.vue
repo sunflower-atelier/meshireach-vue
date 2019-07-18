@@ -60,7 +60,7 @@ export default {
         headers: authHeaderBody
       }).catch((err) => {
         this.$message.error('some error occurs try again')
-        return err.response;
+        return err.response
       })
       if(res.status == 201){
         this.$message.success(this.makeRelationForm.friendID+' become your friend')

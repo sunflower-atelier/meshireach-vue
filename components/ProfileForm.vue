@@ -77,7 +77,7 @@ export default {
       })
     },
     async sendProfileToServer(searchID, name, message){
-      const authHeaderBody = await makeAuthHeaderBody();
+      const authHeaderBody = await makeAuthHeaderBody()
       const res = await this.$axios.post('http://localhost:3000/profiles', {
         searchID: searchID,
         name: name,
@@ -86,7 +86,7 @@ export default {
         headers: authHeaderBody
       }).catch((err) => {
         this.$message.error('some error occurs try again')
-        return err.response;
+        return err.response
       })
       if(res.status === 201){
         const user = res.data
