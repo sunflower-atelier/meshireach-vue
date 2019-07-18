@@ -87,7 +87,7 @@ export default {
       const now = moment()
       const inputDate = moment(this.eventForm.date+' '+value, 'YYYY-MM-DD HH:mm')
 
-      if(now < inputDate){
+      if(now <= inputDate){
         callback()
         return
       }
@@ -104,7 +104,7 @@ export default {
       },
       timePickerOptions: {
         format: 'HH:mm',
-        step: '00:30',
+        step: '00:15',
         start: '00:00',
         end: '23:30'
       },
@@ -153,7 +153,7 @@ export default {
         headers: authHeaderBody
       }).catch((err) => {
         this.$message.error('some error occurs try again')
-        return err.response;
+        return err.response
       })
 
       if(res.status === 201){
