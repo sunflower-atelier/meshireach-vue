@@ -129,37 +129,29 @@ export default {
   methods:{
     async submitForm(formName){
       this.$refs[formName].validate(async (valid) => {
-        if(valid){
-          this.$refs[formName].validate(async (valid) => {
-          if(valid){
-            await this.postEvent()
-          }else{
+        if(!valid){
           this.$message.error('input value is invalid')
-          }
+          return
+        }
+        const authHeaderBody = await makeAuthHeaderBody()
+        const title = this.eventForm.title
+        const deadline = moment(this.eventForm.date+' '+this.eventForm.time, 'YYY-MM-DD HH:mm')
+        const res = await this.$axios.post('http://localhost:3000/event', {
+          title: title,
+          deadline: deadline.format('YYYY-MM-DD-HH-mm')
+        },{
+          headers: authHeaderBody
+        }).catch((err) => {
+          this.$message.error('some error occurs try again')
+          return err.response
         })
-        }else{
-         this.$message.error('input value is invalid')
+
+        if(res.status === 201){
+          this.$message.success('new event created')
+          this.$refs[formName].resetFields()
+          this.$emit('success-event-make')
         }
       })
-    },
-    async postEvent(){
-      const authHeaderBody = await makeAuthHeaderBody()
-      const deadline = moment(this.eventForm.date+' '+this.eventForm.time, 'YYY-MM-DD HH:mm')
-      const title = this.eventForm.title
-      const res = await this.$axios.post('http://localhost:3000/event', {
-        title: title,
-        deadline: deadline.format('YYYY-MM-DD-HH-mm')
-      },{
-        headers: authHeaderBody
-      }).catch((err) => {
-        this.$message.error('some error occurs try again')
-        return err.response
-      })
-
-      if(res.status === 201){
-        this.$message.success('new event created')
-        this.$emit('success-event-make')
-      }
     }
   }
 }
