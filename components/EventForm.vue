@@ -95,10 +95,11 @@ export default {
         }
         const authHeaderBody = await makeAuthHeaderBody()
         const title = this.eventForm.title
-        const deadline = moment(this.eventForm.date+' '+this.eventForm.time, 'YYY-MM-DD HH:mm')
+        const deadline = moment(this.eventForm.date+' '+this.eventForm.time, 'YYYY-MM-DD HH:mm')
+        console.log(deadline.format())
         const res = await this.$axios.post('http://localhost:3000/event', {
           title: title,
-          deadline: deadline.format('YYYY-MM-DD-HH-mm')
+          deadline: deadline.format()
         },{
           headers: authHeaderBody
         }).catch((err) => {
