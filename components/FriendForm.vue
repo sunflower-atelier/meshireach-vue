@@ -64,7 +64,7 @@ export default {
       })
       if(res.status == 201){
         this.$message.success(this.makeRelationForm.friendID+' become your friend')
-        this.$emit('success-friend-make')
+        this.$emit('friend-created')
       }
     }
   },

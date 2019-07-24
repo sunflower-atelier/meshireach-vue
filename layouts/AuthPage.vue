@@ -16,7 +16,7 @@
           <el-dialog 
             :visible.sync="eventFormVisible"
             title="input meshi detail" >
-            <event-form @success-event-make="hideEventForm"/>
+            <event-form @event-created="hideEventForm"/>
           </el-dialog>
           <el-menu-item @click="showFriendForm">
             <i class="el-icon-user"/>
@@ -25,7 +25,7 @@
           <el-dialog 
             :visible.sync="friendFormVisible"
             title="input your friend's id" >
-            <friend-form @success-friend-make="hideFriendForm"/>
+            <friend-form @friend-created="hideFriendForm"/>
           </el-dialog>
           <el-menu-item @click="userSetting">
             <i class="el-icon-setting"/>

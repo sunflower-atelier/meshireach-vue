@@ -109,7 +109,7 @@ export default {
         if(res.status === 201){
           this.$message.success('new event created')
           this.$refs[formName].resetFields()
-          this.$emit('success-event-make')
+          this.$emit('event-created')
         }
       })
     },
