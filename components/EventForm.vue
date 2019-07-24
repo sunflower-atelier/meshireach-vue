@@ -57,9 +57,11 @@ export default {
   data(){
     return {
       datePickerOptions: {
-        disabledDate(time){
+        disabledDate(date){
+          const eachDate = moment(date)
           const today = moment({hour:0, mninute:0, seconds:0, milliseconds:0})
-          return time.getTime() < today.toDate().getTime() || time.getTime() > today.toDate().getTime() + 3600 * 24 * 1000 * 3
+          const upperLimitDate = today.clone().add(3,'days')
+          return eachDate.isBefore(today) || eachDate.isAfter(upperLimitDate)
         }
       },
       timePickerOptions: {
