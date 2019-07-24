@@ -121,7 +121,7 @@ export default {
 
       const today = moment({hour:0, mninute:0, seconds:0, milliseconds:0})
       const inputDate = moment(value, 'YYYY-MM-DD')
-      if(today > inputDate){
+      if(inputDate.isBefore(today)){
         callback(new Error('pick future date'))
         return
       }
@@ -145,7 +145,7 @@ export default {
       const now = moment()
       const inputDate = moment(this.eventForm.date+' '+value, 'YYYY-MM-DD HH:mm')
 
-      if(now <= inputDate){
+      if(now.isBefore(inputDate)){
         callback()
         return
       }
