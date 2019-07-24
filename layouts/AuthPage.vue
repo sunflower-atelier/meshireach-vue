@@ -9,23 +9,23 @@
       </div>
       <el-menu>
         <template v-if="currentUser">
-          <el-menu-item @click="showEventForm">
+          <el-menu-item @click="toggleEventForm">
             <i class="el-icon-dish"/>
             <span>make meshi</span>
           </el-menu-item>
           <el-dialog 
             :visible.sync="eventFormVisible"
             title="input meshi detail" >
-            <event-form @event-created="hideEventForm"/>
+            <event-form @event-created="toggleEventForm"/>
           </el-dialog>
-          <el-menu-item @click="showFriendForm">
+          <el-menu-item @click="toggleFriendForm">
             <i class="el-icon-user"/>
             make friend
           </el-menu-item>
           <el-dialog 
             :visible.sync="friendFormVisible"
             title="input your friend's id" >
-            <friend-form @friend-created="hideFriendForm"/>
+            <friend-form @friend-created="toggleFriendForm"/>
           </el-dialog>
           <el-menu-item @click="userSetting">
             <i class="el-icon-setting"/>
@@ -84,17 +84,11 @@ export default{
         this.$message.error('you cannot logout')
       })
     },
-    showEventForm(){
-      this.eventFormVisible = true
+    toggleEventForm(){
+      this.eventFormVisible = !this.eventFormVisible
     },
-    showFriendForm(){
-      this.friendFormVisible = true
-    },
-    hideEventForm(){
-      this.eventFormVisible = false
-    },
-    hideFriendForm(){
-      this.friendFormVisible = false
+    toggleFriendForm(){
+      this.friendFormVisible = !this.friendFormVisible
     },
     userSetting(){
       this.$message.success('user setting')
