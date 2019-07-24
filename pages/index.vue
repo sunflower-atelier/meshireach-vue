@@ -2,7 +2,7 @@
   <div id="top-view-wrapper">
     <el-tabs stretch>
       <el-tab-pane label="ダチのめし募集">
-        めしりすと
+        <event-list/>
       </el-tab-pane>
       <el-tab-pane label="自分のめし募集">
         じぶんのめしりすと
@@ -16,9 +16,13 @@
 
 <script>
 import makeAuthHeaderBody from '../plugins/id-token'
+import EventList from '../components/EventList'
 
 export default {
   layout : 'AuthPage',
+  components: {
+    EventList
+  },
   methods:{
     async sendPrivate(){
       const authHeader = await makeAuthHeaderBody();
