@@ -8,14 +8,22 @@
         <div slot="header">
           <span>{{ event.title }}</span>
         </div>
-        <el-row>
-          <el-col :span="12">
-            募集者 : {{ event.owner }}
-          </el-col>
-          <el-col :span="12">
-            日付 : {{ event.deadline }}
-          </el-col>
-        </el-row>
+        <dl>
+          <dt>
+            owner
+          </dt>
+          <dd>
+            {{ event.owner }}
+          </dd>
+        </dl>
+        <dl>
+          <dt>
+            date
+          </dt>
+          <dd>
+            {{ event.deadline }}
+          </dd>
+        </dl>
         <div class="card-bottom">
           <el-button type="text">
             詳細表示
@@ -34,14 +42,34 @@ export default {
     }
   }
 }
-</script>>
+</script>
 
 <style>
+.el-card{
+  margin-top: 10px;
+}
+.el-card__header{
+  font-size: 20px;
+}
 .event-list{
   list-style: none;
 }
 .card-bottom{
   margin-top: 13px;
   line-height: 12px;
+}
+dl {
+  margin: 5px;
+  display: flex;
+  font-size: 18px;
+}
+
+dt {
+  color: #AAA;
+  width: 90px;
+}
+
+dd {
+  margin: 0;
 }
 </style>
