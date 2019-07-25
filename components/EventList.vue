@@ -45,14 +45,14 @@ export default {
 </script>
 
 <style>
+.event-list{
+  list-style: none;
+}
 .el-card{
   margin-top: 10px;
 }
 .el-card__header{
   font-size: 20px;
-}
-.event-list{
-  list-style: none;
 }
 .card-bottom{
   margin-top: 13px;
@@ -63,7 +63,6 @@ dl {
   display: flex;
   font-size: 18px;
 }
-
 dt {
   color: #AAA;
   width: 90px;
