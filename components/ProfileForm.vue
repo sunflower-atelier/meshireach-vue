@@ -4,34 +4,34 @@
       <el-card>
         <h1>プロフィール入力画面</h1>
         <el-form
-          ref="form" 
-          :model="form" 
-          :rules="rules" 
-          status-icon 
+          ref="form"
+          :model="form"
+          :rules="rules"
+          status-icon
           label-position="top"
           label-width="120px">
-          <el-form-item 
-            label="ユーザーID" 
+          <el-form-item
+            label="ユーザーID"
             prop="searchID">
-            <el-input 
-              v-model="form.searchID" 
+            <el-input
+              v-model="form.searchID"
               placeholder="user id"/>
           </el-form-item>
-          <el-form-item 
+          <el-form-item
             label="名前"
             prop="userName">
-            <el-input 
-              v-model="form.userName" 
+            <el-input
+              v-model="form.userName"
               placeholder="your name"/>
           </el-form-item>
           <el-form-item label="ひとこと">
-            <el-input 
-              v-model="form.message" 
+            <el-input
+              v-model="form.message"
               placeholder="message to other users" />
           </el-form-item>
           <el-form-item>
             <el-button
-              type="primary" 
+              type="primary"
               @click="submitForm('form')">確認</el-button>
           </el-form-item>
         </el-form>

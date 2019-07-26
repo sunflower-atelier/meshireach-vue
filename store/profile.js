@@ -23,7 +23,7 @@ export const mutations = {
 
 export const actions = {
   fetchUserFromAPIServer: async ({ commit }) => {
-    const authHeaderBody = await makeAuthHeaderBody();
+    const authHeaderBody = await makeAuthHeaderBody()
     const res = await axios.get('http://localhost:3000/profiles', {
       headers: authHeaderBody
     }).catch((err) => {
