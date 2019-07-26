@@ -34,8 +34,8 @@ export default {
 </script>
 
 <style>
-  #friend-list {
-    max-height: 100vh;
-    overflow: scroll;
-  }
+#friend-list {
+  max-height: 100vh;
+  overflow: scroll;
+}
 </style>
