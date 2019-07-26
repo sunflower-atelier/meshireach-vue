@@ -9,18 +9,23 @@
       </div>
       <el-menu>
         <template v-if="currentUser">
-          <el-menu-item @click="makeMeshi">
+          <el-menu-item @click="toggleEventForm">
             <i class="el-icon-dish"/>
             <span>make meshi</span>
           </el-menu-item>
-          <el-menu-item @click="makeFriend">
+          <el-dialog 
+            :visible.sync="eventFormVisible"
+            title="input meshi detail" >
+            <event-form @event-created="toggleEventForm"/>
+          </el-dialog>
+          <el-menu-item @click="toggleFriendForm">
             <i class="el-icon-user"/>
             make friend
           </el-menu-item>
           <el-dialog 
             :visible.sync="friendFormVisible"
             title="input your friend's id" >
-            <friend-form @success-friend-make="friendFormVisible = false"/>
+            <friend-form @friend-created="toggleFriendForm"/>
           </el-dialog>
           <el-menu-item @click="userSetting">
             <i class="el-icon-setting"/>
@@ -49,17 +54,20 @@ import locale from 'element-ui/lib/locale/lang/ja'
 
 import firebase from '../plugins/firebase'
 import FriendForm from '../components/FriendForm' 
+import EventForm from '../components/EventForm' 
 
 Vue.use(ElementUI, {locale});
 
 export default{
   middleware: 'authorized',
   components: {
+    EventForm,
     FriendForm
   },
   data(){
     return {
       friendFormVisible: false,
+      eventFormVisible: false
     }
   },
   computed: {
@@ -76,11 +84,11 @@ export default{
         this.$message.error('you cannot logout')
       })
     },
-    makeMeshi(){
-      this.$message.success('meshi is created')
+    toggleEventForm(){
+      this.eventFormVisible = !this.eventFormVisible
     },
-    makeFriend(){
-      this.friendFormVisible = true
+    toggleFriendForm(){
+      this.friendFormVisible = !this.friendFormVisible
     },
     userSetting(){
       this.$message.success('user setting')
