@@ -44,7 +44,7 @@ export default {
     }
   },
   async created(){
-    const authHeaderBody = makeAuthHeaderBody()
+    const authHeaderBody = await makeAuthHeaderBody()
     const res = await this.$axios.get('http://localhost:3000/events', {
       headers: authHeaderBody
     }).catch((err) => {
