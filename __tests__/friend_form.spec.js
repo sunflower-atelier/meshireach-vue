@@ -20,7 +20,7 @@ describe('validation test', () => {
 
   /**
    * inputに値を入力してvalidation結果を照合する
-   * @param {string} inputValue inputに入力する値 
+   * @param {string} inputValue inputに入力する値
    * @param {boolean} isValid 入力がvalidかどうか(trueならvalid)
    * @param {*} done jestにテストの終了を通知するdoneコールバック
    */

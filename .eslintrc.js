@@ -17,6 +17,9 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'no-console': 'warn'
+    'no-console': 'warn',
+    'eol-last': ['error', 'always'],
+    'semi': ['error', 'never'],
+    'indent': ['error', 2]
   }
 }

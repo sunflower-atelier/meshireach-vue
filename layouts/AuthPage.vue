@@ -1,31 +1,26 @@
 <template>
   <el-container>
     <el-aside width="170px">
-      <div 
-        v-if="currentUser" 
+      <div
+        v-if="currentUser"
         id="profile-wrapper">
         <p id="user-name">{{ currentUser.name }}</p>
         <p id="user-id">ID: {{ currentUser.searchID }}</p>
       </div>
       <el-menu>
         <template v-if="currentUser">
-          <el-menu-item @click="toggleEventForm">
+          <el-menu-item @click="makeMeshi">
             <i class="el-icon-dish"/>
             <span>make meshi</span>
           </el-menu-item>
-          <el-dialog 
-            :visible.sync="eventFormVisible"
-            title="input meshi detail" >
-            <event-form @event-created="toggleEventForm"/>
-          </el-dialog>
-          <el-menu-item @click="toggleFriendForm">
+          <el-menu-item @click="makeFriend">
             <i class="el-icon-user"/>
             make friend
           </el-menu-item>
-          <el-dialog 
+          <el-dialog
             :visible.sync="friendFormVisible"
             title="input your friend's id" >
-            <friend-form @friend-created="toggleFriendForm"/>
+            <friend-form @success-friend-make="friendFormVisible = false"/>
           </el-dialog>
           <el-menu-item @click="userSetting">
             <i class="el-icon-setting"/>
@@ -53,21 +48,18 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/ja'
 
 import firebase from '../plugins/firebase'
-import FriendForm from '../components/FriendForm' 
-import EventForm from '../components/EventForm' 
+import FriendForm from '../components/FriendForm'
 
-Vue.use(ElementUI, {locale});
+Vue.use(ElementUI, {locale})
 
 export default{
   middleware: 'authorized',
   components: {
-    EventForm,
     FriendForm
   },
   data(){
     return {
       friendFormVisible: false,
-      eventFormVisible: false
     }
   },
   computed: {
@@ -84,11 +76,11 @@ export default{
         this.$message.error('you cannot logout')
       })
     },
-    toggleEventForm(){
-      this.eventFormVisible = !this.eventFormVisible
+    makeMeshi(){
+      this.$message.success('meshi is created')
     },
-    toggleFriendForm(){
-      this.friendFormVisible = !this.friendFormVisible
+    makeFriend(){
+      this.friendFormVisible = true
     },
     userSetting(){
       this.$message.success('user setting')

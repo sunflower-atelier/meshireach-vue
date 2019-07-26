@@ -2,7 +2,7 @@ import auth from '../plugins/auth'
 
 export default async function ({ store, route, redirect }) {
 
-  const firebaseUser = await auth();
+  const firebaseUser = await auth()
   if(!firebaseUser){
     return redirect('/login')
   }
