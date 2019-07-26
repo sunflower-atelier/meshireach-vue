@@ -14,19 +14,16 @@ export default {
   components: {
     friendListItem
   },
-  data() {
-    return {
-      friends: []
-    }
-  },
   computed: {
+    friends() {
+      return this.getFriends
+    },
     ...mapGetters('home', {
       getFriends: 'getFriends'
     })
   },
   async created() {
     await this.fetchFriendsFromAPIServer()
-    this.friends = this.getFriends
   },
   methods: {
     ...mapActions('home', [
