@@ -47,7 +47,7 @@ export default {
       this.$refs[formName].validate(async (valid) => {
         if(!valid){
           this.$message.error('input value is invalid')
-            return
+          return
         }
 
         const friendID = this.friendForm.friendID
@@ -59,7 +59,7 @@ export default {
           headers: authHeaderBody
         }).catch((err) => {
           this.$message.error('some error occurs try again')
-          return err.response;
+          return err.response
         })
         if(res.status == 201){
           this.$message.success(res.data.searchID+' become your friend')

@@ -71,7 +71,6 @@ export default {
         if(valid){
           await this.sendProfileToServer(this.form.searchID, this.form.userName, this.form.message)
         }else{
-          console.log(valid)
           this.$message.error('input value is invalid')
         }
       })

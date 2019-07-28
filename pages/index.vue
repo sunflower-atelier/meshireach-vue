@@ -22,15 +22,6 @@ export default {
   layout : 'AuthPage',
   components: {
     friendList
-  },
-  methods:{
-    async sendPrivate(){
-      const authHeader = await makeAuthHeaderBody()
-      const res = await this.$axios.get('http://localhost:3000/private' ,{
-        headers: authHeader
-      })
-      console.log(res)
-    }
   }
 }
 </script>
