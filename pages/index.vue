@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import makeAuthHeaderBody from '../plugins/id-token'
 import friendList from '../components/FriendList'
 
 export default {
