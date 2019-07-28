@@ -15,14 +15,14 @@
       <div class="card-bottom">
         <el-button 
           type="text"
-          @click="openEventDialog(event.id)">
+          @click="openEventDialog()">
           詳細表示
         </el-button>
       </div>
     </el-card>
     <el-dialog 
       :visible.sync="eventDialogVisible"
-      @open="getEventDetail">
+      @open="getEventDetail(event.id)">
       <div slot="title">
         {{ event.title }}
       </div>
@@ -66,15 +66,14 @@ export default {
     toggleDisplayEventDialog(){
       this.eventDialogVisible = !this.eventDialogVisible
     },
-    openEventDialog(eventID){
-      this.getEventDetail(eventID)
+    openEventDialog(){
       this.eventDialogVisible = !this.eventDialogVisible
     },
     getEventDetail(eventID){
       console.log(eventID)
     },
     joinEvent(){
-      
+      this.$message.success('you joined event')
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <ul>
-      <event-list-form 
+    <ul id="event-list">
+      <event-list-item 
         v-for="(event, index) in events"
         :key="index"
         :event="event"/>
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     events() {
-      return this.getFriends
+      return this.getEvents
     },
     ...mapGetters('home', {
       getEvents: 'getEvents'
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style>
-.event-list{
+#event-list{
   list-style: none;
   max-height: 100vh;
   overflow: scroll;

@@ -48,7 +48,7 @@ export const actions = {
     })
 
     if (res.status === 200) {
-      commit('seEvents', res.data.events)
+      commit('setEvents', res.data.events)
     }
   }
 }
