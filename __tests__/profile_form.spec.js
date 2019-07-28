@@ -6,8 +6,8 @@ import axios from "axios"
 import MockAdapter from "axios-mock-adapter"
 import makeAuthHeaderBody from '../plugins/id-token'
 
-const localVue = createLocalVue();
-localVue.use(ElementUI);
+const localVue = createLocalVue()
+localVue.use(ElementUI)
 localVue.use(Vuex)
 jest.mock('../plugins/id-token')
 makeAuthHeaderBody.mockResolvedValue({})
@@ -17,14 +17,14 @@ describe('validation test', () => {
   let profileFormWrapper
 
   beforeEach(() => {
-    profileFormWrapper = mount(ProfileForm, { 
+    profileFormWrapper = mount(ProfileForm, {
       localVue
     })
   })
 
   /**
    * inputに入力して, el-form-itemにつけられるclass名から入力が正しく認識されてるか確認する
-   * @param {int} inputIndex 何番目のinputか 
+   * @param {int} inputIndex 何番目のinputか
    * @param {string} inputStr     inputに入力する文字列
    * @param {string} expectedClassName el-form-itemにつくclass名(.is-success or .is-error)
    */
@@ -74,7 +74,7 @@ describe('form value is correctly validated when post', () => {
 
   beforeEach(() => {
 
-    profileFormWrapper = mount(ProfileForm, { 
+    profileFormWrapper = mount(ProfileForm, {
       localVue
     })
   })
@@ -117,7 +117,7 @@ describe('post profile test', () => {
         }
       }
     })
-    profileFormWrapper = mount(ProfileForm, { 
+    profileFormWrapper = mount(ProfileForm, {
       localVue,
       mocks: { $router: router, $store: store, $axios: axios}
     })

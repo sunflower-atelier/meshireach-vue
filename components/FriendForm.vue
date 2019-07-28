@@ -7,16 +7,16 @@
     label-position="top"
     label-width="120px">
 
-    <el-form-item 
+    <el-form-item
       label="ユーザID"
       prop="friendID">
-      <el-input 
-        v-model="friendForm.friendID" 
+      <el-input
+        v-model="friendForm.friendID"
         placeholder="user id"/>
     </el-form-item>
     <el-form-item>
       <el-button
-        type="primary" 
+        type="primary"
         @click="submitForm('friendForm')">
         送信
       </el-button>
@@ -48,7 +48,7 @@ export default {
         if(valid){
           await this.postFriendRelation(this.friendForm.friendID)
         }else{
-         this.$message.error('input value is invalid')
+          this.$message.error('input value is invalid')
         }
       })
     },
@@ -60,7 +60,7 @@ export default {
         headers: authHeaderBody
       }).catch((err) => {
         this.$message.error('some error occurs try again')
-        return err.response;
+        return err.response
       })
       if(res.status == 201){
         this.$message.success(this.makeRelationForm.friendID+' become your friend')

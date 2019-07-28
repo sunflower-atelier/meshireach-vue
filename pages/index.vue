@@ -8,7 +8,7 @@
         じぶんのめしりすと
       </el-tab-pane>
       <el-tab-pane label="ダチリスト">
-        だちのりすと
+        <friend-list/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -17,15 +17,17 @@
 <script>
 import makeAuthHeaderBody from '../plugins/id-token'
 import EventList from '../components/EventList'
+import friendList from '../components/FriendList'
 
 export default {
   layout : 'AuthPage',
   components: {
-    EventList
+    EventList,
+    friendList
   },
   methods:{
     async sendPrivate(){
-      const authHeader = await makeAuthHeaderBody();
+      const authHeader = await makeAuthHeaderBody()
       const res = await this.$axios.get('http://localhost:3000/private' ,{
         headers: authHeader
       })

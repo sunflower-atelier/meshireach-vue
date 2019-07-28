@@ -12,10 +12,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 // ElementUIでの言語設定、datePickerとかで適用される
 import locale from 'element-ui/lib/locale/lang/ja'
 
-Vue.use(ElementUI, {locale});
+Vue.use(ElementUI, {locale})
 
 export default{
-  
+
 }
 </script>
 

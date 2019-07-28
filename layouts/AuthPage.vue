@@ -1,8 +1,8 @@
 <template>
   <el-container>
     <el-aside width="170px">
-      <div 
-        v-if="currentUser" 
+      <div
+        v-if="currentUser"
         id="profile-wrapper">
         <p id="user-name">{{ currentUser.name }}</p>
         <p id="user-id">ID: {{ currentUser.searchID }}</p>
@@ -17,7 +17,7 @@
             <i class="el-icon-user"/>
             make friend
           </el-menu-item>
-          <el-dialog 
+          <el-dialog
             :visible.sync="friendFormVisible"
             title="input your friend's id" >
             <friend-form @success-friend-make="friendFormVisible = false"/>
@@ -48,9 +48,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/ja'
 
 import firebase from '../plugins/firebase'
-import FriendForm from '../components/FriendForm' 
+import FriendForm from '../components/FriendForm'
 
-Vue.use(ElementUI, {locale});
+Vue.use(ElementUI, {locale})
 
 export default{
   middleware: 'authorized',
