@@ -17,8 +17,6 @@ export default async function ({ store, route, redirect }) {
     storedUserInfo = store.getters['profile/getCurrentUser']
   }
 
-  console.log(storedUserInfo)
-
   // profile登録が済んでいない場合はprofileページに飛ぶ
   if(!storedUserInfo && route.name != 'profile'){
     return redirect('/profile')
