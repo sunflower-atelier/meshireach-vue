@@ -54,3 +54,74 @@ test('addFriends() adds friends', () => {
     message: 'test'
   }])
 })
+
+test('getEvents() returns null without setting', () => {
+  expect(getters.getEvents(state())).toBe(null)
+})
+
+test('setEvents() registers events', () => {
+  const mockState = state()
+  mutations.setEvents(mockState, [{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+  expect(mockState.events).toStrictEqual([{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+})
+
+test('getEvents() returns events after setting', () => {
+  const mockState = state()
+  mutations.setEvents(mockState, [{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+  expect(getters.getEvents(mockState)).toStrictEqual([{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+})
+
+test('addEvents() adds events', () => {
+  const mockState = state()
+  mutations.setEvents(mockState, [{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+  mutations.addEvents(mockState, {
+    id: 1,
+    title: 'meshi title 2',
+    ownerID: 'ownerID 2',
+    owner: 'ownerName 2',
+    deadline: '2019-01-01T00:00:00Z'
+  })
+  expect(getters.getEvents(mockState)).toStrictEqual([{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  },{
+    id: 1,
+    title: 'meshi title 2',
+    ownerID: 'ownerID 2',
+    owner: 'ownerName 2',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+})
