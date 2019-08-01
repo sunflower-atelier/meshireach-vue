@@ -6,7 +6,10 @@
       </div>
       <dl>
         <dt>owner</dt>
-        <dd>{{ event.owner }} <span class="owner-id">({{ event.ownerID }})</span></dd>
+        <dd>
+          {{ event.owner }} 
+          <span class="owner-id">(@{{ event.ownerID }})</span>
+        </dd>
       </dl>
       <dl>
         <dt>date</dt>
