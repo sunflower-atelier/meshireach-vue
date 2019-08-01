@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import SigninSignupForm from '../components/SigninSignupForm.vue'
+import SigninSignupForm from '../components/signin/SigninSignupForm.vue'
 import firebase from '../plugins/firebase'
 
 export default{

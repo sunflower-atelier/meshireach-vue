@@ -53,8 +53,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/ja'
 
 import firebase from '../plugins/firebase'
-import FriendForm from '../components/FriendForm'
-import EventForm from '../components/EventForm'
+import FriendForm from '../components/friendForm/FriendForm'
+import EventForm from '../components/eventForm/EventForm'
 
 Vue.use(ElementUI, {locale})
 
@@ -132,4 +132,3 @@ html {
   border-bottom: solid 1px #e6e6e6;
 }
 </style>
-
