@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment'
 import makeAuthHeaderBody from '../plugins/id-token'
 
 export const state = () => ({
@@ -48,7 +49,13 @@ export const actions = {
     })
 
     if (res.status === 200) {
-      commit('setEvents', res.data.events)
+      const events = res.data.events
+      events.map(event => {
+        const deadline = moment(event.deadline)
+        event.deadline = deadline.format('YYYY MM/DD HH:mm')
+        return event
+      })
+      commit('setEvents', events)
     }
   }
 }
