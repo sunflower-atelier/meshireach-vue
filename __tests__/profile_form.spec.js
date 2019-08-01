@@ -1,5 +1,5 @@
 import {mount, createLocalVue} from '@vue/test-utils'
-import ProfileForm from '../components/ProfileForm'
+import ProfileForm from '../components/profileForm/ProfileForm'
 import Vuex from 'vuex'
 import ElementUI from 'element-ui'
 import axios from "axios"

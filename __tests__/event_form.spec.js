@@ -1,5 +1,5 @@
 import {mount, createLocalVue} from '@vue/test-utils'
-import EventForm from '../components/EventForm'
+import EventForm from '../components/eventForm/EventForm'
 import ElementUI from 'element-ui'
 import moment from 'moment'
 

@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import makeAuthHeaderBody from '../plugins/id-token'
-import * as validation from '../util/validation'
+import makeAuthHeaderBody from '~/plugins/id-token'
+import * as validation from '~/util/validation'
 
 export default {
   layout : 'AuthPage',

@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import makeAuthHeaderBody from '../plugins/id-token'
-import { searchIDValidation } from '../util/validation'
+import makeAuthHeaderBody from '~/plugins/id-token'
+import { searchIDValidation } from '~/util/validation'
 
 export default {
   data(){

@@ -15,8 +15,9 @@
 </template>
 
 <script>
-import EventList from '../components/EventList'
-import friendList from '../components/FriendList'
+
+import EventList from '../components/home/EventList'
+import friendList from '../components/home/FriendList'
 
 export default {
   layout : 'AuthPage',
@@ -38,4 +39,3 @@ export default {
   padding: 10px 15px 10px 15px;
 }
 </style>
-

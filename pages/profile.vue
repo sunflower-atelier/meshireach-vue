@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ProfileForm from '../components/ProfileForm.vue'
+import ProfileForm from '../components/profileForm/ProfileForm.vue'
 export default {
   layout : 'AuthPage',
   components: {

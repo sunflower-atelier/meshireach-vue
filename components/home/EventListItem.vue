@@ -7,7 +7,7 @@
       <dl>
         <dt>owner</dt>
         <dd>
-          {{ event.owner }} 
+          {{ event.owner }}
           <span class="owner-id">(@{{ event.ownerID }})</span>
         </dd>
       </dl>
@@ -16,14 +16,14 @@
         <dd>{{ event.deadline }}</dd>
       </dl>
       <div class="card-bottom">
-        <el-button 
+        <el-button
           type="text"
           @click="toggleDisplayEventDialog">
           詳細表示
         </el-button>
       </div>
     </el-card>
-    <el-dialog 
+    <el-dialog
       :visible.sync="eventDialogVisible"
       @open="getEventDetail(event.id)">
       <div slot="title">
@@ -37,12 +37,12 @@
         <dt>time</dt>
         <dd>{{ event.deadline }}</dd>
       </dl>
-      <span 
-        slot="footer" 
+      <span
+        slot="footer"
         class="dialog-footer">
         <el-button @click="toggleDisplayEventDialog">Cancel</el-button>
-        <el-button 
-          type="primary" 
+        <el-button
+          type="primary"
           @click="joinEvent">Join</el-button>
       </span>
     </el-dialog>

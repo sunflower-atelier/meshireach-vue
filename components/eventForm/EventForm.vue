@@ -6,16 +6,16 @@
     status-icon
     label-position="top"
     label-width="120px">
-    <el-form-item 
-      label="title" 
+    <el-form-item
+      label="title"
       prop="title">
-      <el-input 
-        v-model="eventForm.title" 
+      <el-input
+        v-model="eventForm.title"
         placeholder="input title" />
     </el-form-item>
 
-    <el-form-item 
-      label="time" 
+    <el-form-item
+      label="time"
       required>
       <el-col :span="11">
         <el-form-item prop="date">
@@ -26,8 +26,8 @@
             placeholder="Pick a date"/>
         </el-form-item>
       </el-col>
-      <el-col 
-        :span="2" 
+      <el-col
+        :span="2"
         class="line">
         -
       </el-col>
@@ -41,8 +41,8 @@
       </el-col>
     </el-form-item>
 
-    <el-button 
-      type="primary" 
+    <el-button
+      type="primary"
       @click="submitForm('eventForm')">
       送信
     </el-button>
@@ -51,7 +51,7 @@
 
 <script>
 import moment from 'moment'
-import makeAuthHeaderBody from '../plugins/id-token'
+import makeAuthHeaderBody from '~/plugins/id-token'
 
 export default {
   data(){

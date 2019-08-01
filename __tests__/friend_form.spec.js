@@ -1,5 +1,5 @@
 import {mount, createLocalVue} from '@vue/test-utils'
-import FriendForm from '../components/FriendForm'
+import FriendForm from '../components/friendForm/FriendForm'
 import Vuex from 'vuex'
 import ElementUI from 'element-ui'
 
