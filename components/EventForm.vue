@@ -107,7 +107,6 @@ export default {
           this.$message.error('some error occurs try again')
           return err.response
         })
-
         if(res.status === 201){
           this.$message.success('new event created')
           this.$refs[formName].resetFields()
