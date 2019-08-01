@@ -18,7 +18,7 @@
       <div class="card-bottom">
         <el-button 
           type="text"
-          @click="openEventDialog()">
+          @click="openEventDialog">
           詳細表示
         </el-button>
       </div>
