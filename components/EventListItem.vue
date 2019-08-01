@@ -18,7 +18,7 @@
       <div class="card-bottom">
         <el-button 
           type="text"
-          @click="openEventDialog">
+          @click="toggleDisplayEventDialog">
           詳細表示
         </el-button>
       </div>
@@ -69,10 +69,8 @@ export default {
     toggleDisplayEventDialog(){
       this.eventDialogVisible = !this.eventDialogVisible
     },
-    openEventDialog(){
-      this.eventDialogVisible = !this.eventDialogVisible
-    },
     getEventDetail(eventID){
+      // 将来的にeventIDを送って, APIサーバーからeventの詳細をもらうことを想定
       console.log(eventID)
     },
     joinEvent(){
