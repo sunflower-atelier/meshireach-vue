@@ -6,6 +6,6 @@ module.exports = {
   },
   moduleFileExtensions: ['js', 'vue'],
   moduleNameMapper: {
-    '\~\/(.+)': '<rootDir>/$1'
+    '~/(.+)': '<rootDir>/$1'
   }
 }
