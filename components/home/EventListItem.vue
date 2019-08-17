@@ -25,17 +25,33 @@
     </el-card>
     <el-dialog
       :visible.sync="eventDialogVisible"
+      width="80%"
       @open="getEventDetail(event.id)">
       <div slot="title">
         {{ event.title }}
       </div>
       <dl>
         <dt>owner</dt>
-        <dd>{{ event.owner }}</dd>
+        <dd>
+          {{ event.owner }} <span class="owner-id">(@{{ event.ownerID }})</span>
+        </dd>
       </dl>
       <dl>
         <dt>time</dt>
         <dd>{{ event.deadline }}</dd>
+      </dl>
+      <dl>
+        <dt>participants</dt>
+        <dd>
+          {{ numOfParticipants }}
+          <a 
+            v-if="participants.length > 0"
+            class="clickable"
+            href="#"
+            @click="toggleDisplayParticipants">
+            (detail)
+          </a>
+        </dd>
       </dl>
       <span
         slot="footer"
@@ -46,11 +62,31 @@
           @click="joinEvent">Join</el-button>
       </span>
     </el-dialog>
+    <el-dialog 
+      :visible.sync="participantsDialogVisible"
+      width="80%"
+      destroy-on-close="true">
+      <div slot="title">
+        perticipants
+      </div>
+      <ul id="participants-list">
+        <li 
+          v-for="(participant, index) in participants"
+          :key="index">
+          <friend-list-item :friend="participant"/>
+        </li>
+      </ul>
+    </el-dialog>
   </li>
 </template>
 
 <script>
+import FriendListItem from './FriendListItem'
+
 export default {
+  components: {
+    FriendListItem
+  },
   props: {
     event: {
       required: true,
@@ -63,6 +99,13 @@ export default {
   data(){
     return{
       eventDialogVisible : false,
+      participantsDialogVisible : false,
+      participants: []
+    }
+  },
+  computed:{
+    numOfParticipants(){
+      return this.participants.length
     }
   },
   methods:{
@@ -75,6 +118,9 @@ export default {
     },
     joinEvent(){
       this.$message.success('you joined event')
+    },
+    toggleDisplayParticipants(){
+      this.participantsDialogVisible = !this.participantsDialogVisible
     }
   }
 }
@@ -91,20 +137,26 @@ export default {
   margin-top: 13px;
   line-height: 12px;
 }
-dl {
-  margin: 5px;
-  display: flex;
-  font-size: 18px;
-}
 dt {
-  color: #AAA;
-  width: 90px;
+  margin-top: 10px;
+  font-weight: bold;
 }
-
 dd {
   margin: 0;
+  padding-left: 20px;
 }
 .owner-id{
   color: #AAA
+}
+#participants-list{
+  list-style: none;
+  padding-left: 0px;
+}
+.el-dialog{
+  max-width: 700px;
+}
+.clickable{
+  color: inherit;
+  cursor: pointer;
 }
 </style>
