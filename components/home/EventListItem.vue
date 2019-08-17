@@ -10,8 +10,6 @@
           {{ event.owner }}
           <span class="owner-id">(@{{ event.ownerID }})</span>
         </dd>
-      </dl>
-      <dl>
         <dt>date</dt>
         <dd>{{ event.deadline }}</dd>
       </dl>
@@ -35,12 +33,8 @@
         <dd>
           {{ event.owner }} <span class="owner-id">(@{{ event.ownerID }})</span>
         </dd>
-      </dl>
-      <dl>
         <dt>time</dt>
         <dd>{{ event.deadline }}</dd>
-      </dl>
-      <dl>
         <dt>participants</dt>
         <dd>
           {{ numOfParticipants }}
