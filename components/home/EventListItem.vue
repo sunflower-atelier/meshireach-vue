@@ -82,6 +82,7 @@
 
 <script>
 import FriendListItem from './FriendListItem'
+import makeAuthHeaderBody from '../../plugins/id-token'
 
 export default {
   components: {
@@ -112,9 +113,19 @@ export default {
     toggleDisplayEventDialog(){
       this.eventDialogVisible = !this.eventDialogVisible
     },
-    getEventDetail(eventID){
+    async getEventDetail(eventID){
       // 将来的にeventIDを送って, APIサーバーからeventの詳細をもらうことを想定
-      console.log(eventID)
+      const headers = await makeAuthHeaderBody()
+      const res = await this.$axios.get('http://localhost:3000/events/'+eventID, {
+        headers
+      }).catch((err) => {
+        return err.response
+      })
+
+      if(res.status === 200){
+        // ここはバックエンドと確認
+        this.participants = res.participants
+      }
     },
     joinEvent(){
       this.$message.success('you joined event')
