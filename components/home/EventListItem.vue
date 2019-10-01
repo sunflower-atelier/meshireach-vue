@@ -35,18 +35,18 @@
         </dd>
         <dt>time</dt>
         <dd>{{ event.deadline }}</dd>
-        <dt>participants</dt>
-        <dd>
-          {{ numOfParticipants }}
-          <a 
-            v-if="participants.length > 0"
-            class="clickable"
-            href="#"
-            @click="toggleDisplayParticipants">
-            (detail)
-          </a>
-        </dd>
       </dl>
+      <el-collapse v-model="activeNames">
+        <el-collapse-item 
+          title="participants" 
+          name="1">
+          <div 
+            v-for="(participant, index) in participants"
+            :key="index">
+            <friend-list-item :friend="participant"/>
+          </div>
+        </el-collapse-item>
+      </el-collapse>
       <span
         slot="footer"
         class="dialog-footer">
@@ -55,21 +55,6 @@
           type="primary"
           @click="joinEvent">Join</el-button>
       </span>
-    </el-dialog>
-    <el-dialog 
-      :visible.sync="participantsDialogVisible"
-      width="80%"
-      destroy-on-close="true">
-      <div slot="title">
-        perticipants
-      </div>
-      <ul id="participants-list">
-        <li 
-          v-for="(participant, index) in participants"
-          :key="index">
-          <friend-list-item :friend="participant"/>
-        </li>
-      </ul>
     </el-dialog>
   </li>
 </template>
@@ -94,8 +79,8 @@ export default {
   data(){
     return{
       eventDialogVisible : false,
-      participantsDialogVisible : false,
-      participants: []
+      participants: [],
+      activeNames: []
     }
   },
   computed:{
@@ -115,7 +100,6 @@ export default {
       }).catch((err) => {
         return err.response
       })
-
       if(res.status === 200){
         // ここはバックエンドと確認
         this.participants = res.participants
@@ -123,9 +107,6 @@ export default {
     },
     joinEvent(){
       this.$message.success('you joined event')
-    },
-    toggleDisplayParticipants(){
-      this.participantsDialogVisible = !this.participantsDialogVisible
     }
   }
 }
@@ -152,10 +133,6 @@ dd {
 }
 .owner-id{
   color: #AAA
-}
-#participants-list{
-  list-style: none;
-  padding-left: 0px;
 }
 .el-dialog{
   max-width: 700px;
