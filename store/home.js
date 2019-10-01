@@ -42,7 +42,7 @@ export const actions = {
   },
   fetchEventsFromAPIServer: async ({ commit }) => {
     const headers = await makeAuthHeaderBody()
-    const res = await axios.get('http://localhost:3000/events', {
+    const res = await axios.get('http://localhost:3000/events/subscriptions', {
       headers
     }).catch((err) => {
       return err.response
