@@ -28,14 +28,27 @@
       <div slot="title">
         {{ event.title }}
       </div>
-      <dl>
-        <dt>owner</dt>
-        <dd>
-          {{ event.owner }} <span class="owner-id">(@{{ event.ownerID }})</span>
-        </dd>
-        <dt>time</dt>
-        <dd>{{ event.deadline }}</dd>
-      </dl>
+      <el-collapse v-model="activeNames">
+        <el-collapse-item 
+          title="owner" 
+          name="1">
+          {{ event.owner }}
+        </el-collapse-item>
+        <el-collapse-item 
+          title="date" 
+          name="2">
+          {{ event.deadline }}
+        </el-collapse-item>
+        <el-collapse-item 
+          title="participants" 
+          name="3">
+          <div 
+            v-for="(participant, index) in participants" 
+            :key="index">
+            {{ participant.name }}, {{ participants.id }}
+          </div>
+        </el-collapse-item>
+      </el-collapse>
       <slot
         slot="footer"
         class="dialog-footer"/>
@@ -64,7 +77,7 @@ export default {
     return{
       eventDialogVisible : false,
       participants: [],
-      activeNames: []
+      activeNames: ['1','2']
     }
   },
   computed:{
@@ -79,14 +92,13 @@ export default {
     async getEventDetail(eventID){
       // 将来的にeventIDを送って, APIサーバーからeventの詳細をもらうことを想定
       const headers = await makeAuthHeaderBody()
-      const res = await this.$axios.get('http://localhost:3000/events/'+eventID, {
+      const res = await this.$axios.get('http://localhost:3000/events/'+eventID+'/participants', {
         headers
       }).catch((err) => {
         return err.response
       })
       if(res.status === 200){
-        // ここはバックエンドと確認
-        this.participants = res.participants
+        this.participants = res.data.friends
       }
     },
   }
