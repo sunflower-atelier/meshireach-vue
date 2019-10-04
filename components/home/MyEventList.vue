@@ -1,15 +1,10 @@
 <template>
   <div>
-    <ul id="event-list">
+    <ul id="my-event-list">
       <event-list-item
-        v-for="(event, index) in events"
+        v-for="(event, index) in myEvents"
         :key="index"
-        :event="event">
-        <el-button
-          type="primary"
-          @click="joinEvent">Join
-        </el-button>
-      </event-list-item>
+        :event="event"/>
     </ul>
   </div>
 </template>
@@ -23,29 +18,26 @@ export default {
     EventListItem
   },
   computed: {
-    events() {
-      return this.getEvents
+    myEvents() {
+      return this.getMyEvents
     },
     ...mapGetters('home', {
-      getEvents: 'getEvents'
+      getMyEvents: 'getMyEvents'
     })
   },
   async created() {
-    await this.fetchEventsFromAPIServer()
+    await this.fetchMyEventsFromAPIServer()
   },
   methods: {
-    joinEvent() {
-      this.$message.success('you joined event')
-    },
     ...mapActions('home', [
-      'fetchEventsFromAPIServer'
+      'fetchMyEventsFromAPIServer'
     ])
   }
 }
 </script>
 
 <style>
-#event-list{
+#my-event-list{
   list-style: none;
   max-height: 100vh;
   overflow: scroll;

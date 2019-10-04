@@ -37,14 +37,9 @@
         <dt>time</dt>
         <dd>{{ event.deadline }}</dd>
       </dl>
-      <span
+      <slot
         slot="footer"
-        class="dialog-footer">
-        <el-button @click="toggleDisplayEventDialog">Cancel</el-button>
-        <el-button
-          type="primary"
-          @click="joinEvent">Join</el-button>
-      </span>
+        class="dialog-footer"/>
     </el-dialog>
   </li>
 </template>
@@ -73,9 +68,6 @@ export default {
       // 将来的にeventIDを送って, APIサーバーからeventの詳細をもらうことを想定
       console.log(eventID)
     },
-    joinEvent(){
-      this.$message.success('you joined event')
-    }
   }
 }
 </script>
