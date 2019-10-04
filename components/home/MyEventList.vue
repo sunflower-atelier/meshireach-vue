@@ -18,11 +18,8 @@ export default {
     EventListItem
   },
   computed: {
-    myEvents() {
-      return this.getMyEvents
-    },
     ...mapGetters('home', {
-      getMyEvents: 'getMyEvents'
+      myEvents: 'getMyEvents'
     })
   },
   async created() {
