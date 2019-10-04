@@ -2,6 +2,25 @@ import axios from 'axios'
 import moment from 'moment'
 import makeAuthHeaderBody from '../plugins/id-token'
 
+
+const fetchFrom = async (url) => {
+  const headers = await makeAuthHeaderBody()
+  const res = await axios.get(url, {
+    headers
+  }).catch((err) => {
+    return err.response
+  })
+  return res
+}
+
+const formatEventsDeadLine = (events) => {
+  return events.map(event => {
+    const deadline = moment(event.deadline)
+    event.deadline = deadline.format('YYYY MM/DD HH:mm')
+    return event
+  })
+}
+
 export const state = () => ({
   events: null,
   friends: null,
@@ -37,51 +56,24 @@ export const mutations = {
 
 export const actions = {
   fetchEventsFromAPIServer: async ({ commit }) => {
-    const headers = await makeAuthHeaderBody()
-    const res = await axios.get('http://localhost:3000/events/subscriptions', {
-      headers
-    }).catch((err) => {
-      return err.response
-    })
+    const res = await fetchFrom('http://localhost:3000/events/subscriptions')
 
     if (res.status === 200) {
-      const events = res.data.events
-      events.map(event => {
-        const deadline = moment(event.deadline)
-        event.deadline = deadline.format('YYYY MM/DD HH:mm')
-        return event
-      })
-      commit('setEvents', events)
+      commit('setEvents', formatEventsDeadLine(res.data.events))
     }
   },
   fetchFriendsFromAPIServer: async ({ commit }) => {
-    const headers = await makeAuthHeaderBody()
-    const res = await axios.get('http://localhost:3000/friends', {
-      headers
-    }).catch((err) => {
-      return err.response
-    })
+    const res = await fetchFrom('http://localhost:3000/friends')
 
     if (res.status === 200) {
       commit('setFriends', res.data.friends)
     }
   },
   fetchMyEventsFromAPIServer: async ({ commit }) => {
-    const headers = await makeAuthHeaderBody()
-    const res = await axios.get('http://localhost:3000/events/subscriptions', {
-      headers
-    }).catch((err) => {
-      return err.response
-    })
+    const res = await fetchFrom('http://localhost:3000/events/subscriptions')
 
     if (res.status === 200) {
-      const events = res.data.events
-      events.map(event => {
-        const deadline = moment(event.deadline)
-        event.deadline = deadline.format('YYYY MM/DD HH:mm')
-        return event
-      })
-      commit('setMyEvents', events)
+      commit('setMyEvents', formatEventsDeadLine(res.data.events))
     }
   }
 }
