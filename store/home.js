@@ -70,7 +70,7 @@ export const actions = {
     }
   },
   fetchMyEventsFromAPIServer: async ({ commit }) => {
-    const res = await fetchFrom('http://localhost:3000/events/subscriptions')
+    const res = await fetchFrom('http://localhost:3000/events')
 
     if (res.status === 200) {
       commit('setMyEvents', formatEventsDeadLine(res.data.events))
