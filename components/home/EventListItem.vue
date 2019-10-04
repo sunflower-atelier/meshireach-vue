@@ -36,25 +36,9 @@
         <dt>time</dt>
         <dd>{{ event.deadline }}</dd>
       </dl>
-      <el-collapse v-model="activeNames">
-        <el-collapse-item 
-          title="participants" 
-          name="1">
-          <div 
-            v-for="(participant, index) in participants"
-            :key="index">
-            <friend-list-item :friend="participant"/>
-          </div>
-        </el-collapse-item>
-      </el-collapse>
-      <span
+      <slot
         slot="footer"
-        class="dialog-footer">
-        <el-button @click="toggleDisplayEventDialog">Cancel</el-button>
-        <el-button
-          type="primary"
-          @click="joinEvent">Join</el-button>
-      </span>
+        class="dialog-footer"/>
     </el-dialog>
   </li>
 </template>
@@ -105,9 +89,6 @@ export default {
         this.participants = res.participants
       }
     },
-    joinEvent(){
-      this.$message.success('you joined event')
-    }
   }
 }
 </script>
