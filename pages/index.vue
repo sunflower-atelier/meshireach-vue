@@ -5,7 +5,7 @@
         <event-list/>
       </el-tab-pane>
       <el-tab-pane label="自分のめし募集">
-        じぶんのめしりすと
+        <my-event-list/>
       </el-tab-pane>
       <el-tab-pane label="ダチリスト">
         <friend-list/>
@@ -17,13 +17,15 @@
 <script>
 
 import EventList from '../components/home/EventList'
-import friendList from '../components/home/FriendList'
+import FriendList from '../components/home/FriendList'
+import MyEventList from '../components/home/MyEventList'
 
 export default {
   layout : 'AuthPage',
   components: {
     EventList,
-    friendList
+    FriendList,
+    MyEventList
   }
 }
 </script>

@@ -2,60 +2,78 @@ import axios from 'axios'
 import moment from 'moment'
 import makeAuthHeaderBody from '../plugins/id-token'
 
+
+const fetchFrom = async (url) => {
+  const headers = await makeAuthHeaderBody()
+  const res = await axios.get(url, {
+    headers
+  }).catch((err) => {
+    return err.response
+  })
+  return res
+}
+
+const formatEventsDeadLine = (events) => {
+  return events.map(event => {
+    const deadline = moment(event.deadline)
+    event.deadline = deadline.format('YYYY MM/DD HH:mm')
+    return event
+  })
+}
+
 export const state = () => ({
+  events: null,
   friends: null,
-  events: null
+  myEvents: null
 })
 
 export const getters = {
+  getEvents: argState => argState.events,
   getFriends: argState => argState.friends,
-  getEvents: argState => argState.events
+  getMyEvents: argState => argState.myEvents
 }
 
 export const mutations = {
-  setFriends: (argState, friends) => {
-    argState.friends = friends
-  },
-  addFriends: (argState, friend) => {
-    argState.friends.push(friend)
+  addEvents: (argState, events) => {
+    argState.events.push(events)
   },
   setEvents: (argState, events) => {
     argState.events = events
   },
-  addEvents: (argState, event) => {
-    argState.events.push(event)
+  addFriends: (argState, friend) => {
+    argState.friends.push(friend)
+  },
+  setFriends: (argState, friends) => {
+    argState.friends = friends
+  },
+  addMyEvents: (argState, events) => {
+    argState.myEvents.push(events)
+  },
+  setMyEvents: (argState, events) => {
+    argState.myEvents = events
   }
 }
 
 export const actions = {
+  fetchEventsFromAPIServer: async ({ commit }) => {
+    const res = await fetchFrom('http://localhost:3000/events/subscriptions')
+
+    if (res.status === 200) {
+      commit('setEvents', formatEventsDeadLine(res.data.events))
+    }
+  },
   fetchFriendsFromAPIServer: async ({ commit }) => {
-    const headers = await makeAuthHeaderBody()
-    const res = await axios.get('http://localhost:3000/friends', {
-      headers
-    }).catch((err) => {
-      return err.response
-    })
+    const res = await fetchFrom('http://localhost:3000/friends')
 
     if (res.status === 200) {
       commit('setFriends', res.data.friends)
     }
   },
-  fetchEventsFromAPIServer: async ({ commit }) => {
-    const headers = await makeAuthHeaderBody()
-    const res = await axios.get('http://localhost:3000/events', {
-      headers
-    }).catch((err) => {
-      return err.response
-    })
+  fetchMyEventsFromAPIServer: async ({ commit }) => {
+    const res = await fetchFrom('http://localhost:3000/events')
 
     if (res.status === 200) {
-      const events = res.data.events
-      events.map(event => {
-        const deadline = moment(event.deadline)
-        event.deadline = deadline.format('YYYY MM/DD HH:mm')
-        return event
-      })
-      commit('setEvents', events)
+      commit('setMyEvents', formatEventsDeadLine(res.data.events))
     }
   }
 }

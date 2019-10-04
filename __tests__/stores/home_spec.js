@@ -125,3 +125,74 @@ test('addEvents() adds events', () => {
     deadline: '2019-01-01T00:00:00Z'
   }])
 })
+
+test('getMyEvents() returns null without setting', () => {
+  expect(getters.getMyEvents(state())).toBe(null)
+})
+
+test('setMyEvents() registers events', () => {
+  const mockState = state()
+  mutations.setMyEvents(mockState, [{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+  expect(mockState.myEvents).toStrictEqual([{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+})
+
+test('getMyEvents() returns events after setting', () => {
+  const mockState = state()
+  mutations.setMyEvents(mockState, [{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+  expect(getters.getMyEvents(mockState)).toStrictEqual([{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+})
+
+test('addMyEvents() adds events', () => {
+  const mockState = state()
+  mutations.setMyEvents(mockState, [{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+  mutations.addMyEvents(mockState, {
+    id: 1,
+    title: 'meshi title 2',
+    ownerID: 'ownerID 2',
+    owner: 'ownerName 2',
+    deadline: '2019-01-01T00:00:00Z'
+  })
+  expect(getters.getMyEvents(mockState)).toStrictEqual([{
+    id: 1,
+    title: 'meshi title',
+    ownerID: 'ownerID',
+    owner: 'ownerName',
+    deadline: '2019-01-01T00:00:00Z'
+  },{
+    id: 1,
+    title: 'meshi title 2',
+    ownerID: 'ownerID 2',
+    owner: 'ownerName 2',
+    deadline: '2019-01-01T00:00:00Z'
+  }])
+})
