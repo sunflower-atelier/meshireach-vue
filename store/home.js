@@ -34,8 +34,8 @@ export const getters = {
 }
 
 export const mutations = {
-  addEvents: (argState, event) => {
-    argState.events.push(event)
+  addEvents: (argState, events) => {
+    argState.events.push(events)
   },
   setEvents: (argState, events) => {
     argState.events = events
