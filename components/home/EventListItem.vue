@@ -29,26 +29,41 @@
         {{ event.title }}
       </div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item 
-          title="owner" 
-          name="1">
-          {{ event.owner }}
+        <el-collapse-item name="1">
+          <template 
+            slot="title" 
+            class="collapse-title">
+            owner
+          </template>
+          <div class="collapse-body">
+            <span>{{ event.owner }}</span>
+          </div>
         </el-collapse-item>
-        <el-collapse-item 
-          title="date" 
-          name="2">
-          {{ event.deadline }}
+        <el-collapse-item name="2">
+          <template 
+            slot="title" 
+            class="collapse-title">
+            date
+          </template>
+          <div class="collapse-body">
+            <span>{{ event.deadline }}</span>
+          </div>
         </el-collapse-item>
-        <el-collapse-item 
-          title="participants" 
-          name="3">
-          <ul>
-            <li
-              v-for="(participant, index) in participants" 
-              :key="index">
-              {{ participant.name }} (@{{ participant.searchID }})
-            </li>
-          </ul>
+        <el-collapse-item name="3">
+          <template 
+            slot="title" 
+            class="collapse-title">
+            participants
+          </template>
+          <div class="collapse-body">
+            <ul>
+              <li
+                v-for="(participant, index) in participants" 
+                :key="index">
+                {{ participant.name }} (@{{ participant.searchID }})
+              </li>
+            </ul>
+          </div>
         </el-collapse-item>
       </el-collapse>
       <slot
@@ -135,5 +150,8 @@ dd {
 .clickable{
   color: inherit;
   cursor: pointer;
+}
+.collapse-body span{
+  padding-left: 20px;
 }
 </style>
