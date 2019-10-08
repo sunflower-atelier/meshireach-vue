@@ -56,7 +56,7 @@ export const mutations = {
 
 export const actions = {
   fetchEventsFromAPIServer: async ({ commit }) => {
-    const res = await fetchFrom('http://localhost:3000/events/subscriptions')
+    const res = await fetchFrom('http://localhost:3000/events-subscriptions')
 
     if (res.status === 200) {
       commit('setEvents', formatEventsDeadLine(res.data.events))
