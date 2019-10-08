@@ -42,11 +42,13 @@
         <el-collapse-item 
           title="participants" 
           name="3">
-          <div 
-            v-for="(participant, index) in participants" 
-            :key="index">
-            {{ participant.name }}, {{ participants.id }}
-          </div>
+          <ul>
+            <li
+              v-for="(participant, index) in participants" 
+              :key="index">
+              {{ participant.name }} (@{{ participant.searchID }})
+            </li>
+          </ul>
         </el-collapse-item>
       </el-collapse>
       <slot
@@ -80,7 +82,7 @@ export default {
       activeNames: ['1','2']
     }
   },
-  computed:{
+  computed: {
     numOfParticipants(){
       return this.participants.length
     }
@@ -98,7 +100,7 @@ export default {
         return err.response
       })
       if(res.status === 200){
-        this.participants = res.data.friends
+        this.participants = res.data.participants
       }
     },
   }
