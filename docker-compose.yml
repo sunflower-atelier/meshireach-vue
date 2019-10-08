@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-      - 3002:3002
+      - 80:3002
     volumes:
       - ./:/var/www/meshireach
     stdin_open: true
