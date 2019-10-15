@@ -29,7 +29,7 @@
         {{ event.title }}
       </div>
       <el-collapse v-model="activeNames">
-        <el-collapse-item name="1">
+        <el-collapse-item name="owner">
           <template 
             slot="title" 
             class="collapse-title">
@@ -39,7 +39,7 @@
             <span>{{ event.owner }}</span>
           </div>
         </el-collapse-item>
-        <el-collapse-item name="2">
+        <el-collapse-item name="title">
           <template 
             slot="title" 
             class="collapse-title">
@@ -49,7 +49,7 @@
             <span>{{ event.deadline }}</span>
           </div>
         </el-collapse-item>
-        <el-collapse-item name="3">
+        <el-collapse-item name="participants">
           <template 
             slot="title" 
             class="collapse-title">
@@ -94,7 +94,7 @@ export default {
     return{
       eventDialogVisible : false,
       participants: [],
-      activeNames: ['1','2']
+      activeNames: ['owner','title']
     }
   },
   computed: {
