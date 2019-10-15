@@ -47,7 +47,7 @@ module.exports = {
   axios: {
   },
   manifest: {
-    gcm_sender_id: '103953800507'　// このgcm_sender_idは固定値
-  }　
+    gcm_sender_id: '103953800507'// このgcm_sender_idは固定値
+  }
 }
 
