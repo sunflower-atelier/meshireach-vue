@@ -37,7 +37,7 @@ export default {
   methods: {
     async joinEvent(eventID) {
       const headers = await makeAuthHeaderBody()
-      const res = await this.$axios.post('http://localhost:3000/events/'+eventID+'/join',{} ,{
+      const res = await this.$axios.post(`http://localhost:3000/events/${eventID}/join`,{} ,{
         headers
       }).catch((err) => {
         return err.response

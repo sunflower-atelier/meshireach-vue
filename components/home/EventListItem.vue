@@ -107,9 +107,8 @@ export default {
       this.eventDialogVisible = !this.eventDialogVisible
     },
     async getEventDetail(eventID){
-      // 将来的にeventIDを送って, APIサーバーからeventの詳細をもらうことを想定
       const headers = await makeAuthHeaderBody()
-      const res = await this.$axios.get('http://localhost:3000/events/'+eventID+'/participants', {
+      const res = await this.$axios.get(`http://localhost:3000/events/${eventID}/participants`, {
         headers
       }).catch((err) => {
         return err.response
