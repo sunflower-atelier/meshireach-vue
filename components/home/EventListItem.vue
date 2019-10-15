@@ -10,8 +10,6 @@
           {{ event.owner }}
           <span class="owner-id">(@{{ event.ownerID }})</span>
         </dd>
-      </dl>
-      <dl>
         <dt>date</dt>
         <dd>{{ event.deadline }}</dd>
       </dl>
@@ -25,18 +23,49 @@
     </el-card>
     <el-dialog
       :visible.sync="eventDialogVisible"
+      width="80%"
       @open="getEventDetail(event.id)">
       <div slot="title">
         {{ event.title }}
       </div>
-      <dl>
-        <dt>owner</dt>
-        <dd>{{ event.owner }}</dd>
-      </dl>
-      <dl>
-        <dt>time</dt>
-        <dd>{{ event.deadline }}</dd>
-      </dl>
+      <el-collapse v-model="activeNames">
+        <el-collapse-item name="owner">
+          <template 
+            slot="title" 
+            class="collapse-title">
+            owner
+          </template>
+          <div class="collapse-body">
+            <span>{{ event.owner }}</span>
+          </div>
+        </el-collapse-item>
+        <el-collapse-item name="title">
+          <template 
+            slot="title" 
+            class="collapse-title">
+            date
+          </template>
+          <div class="collapse-body">
+            <span>{{ event.deadline }}</span>
+          </div>
+        </el-collapse-item>
+        <el-collapse-item name="participants">
+          <template 
+            slot="title" 
+            class="collapse-title">
+            participants
+          </template>
+          <div class="collapse-body">
+            <ul>
+              <li
+                v-for="(participant, index) in participants" 
+                :key="index">
+                {{ participant.name }} (@{{ participant.searchID }})
+              </li>
+            </ul>
+          </div>
+        </el-collapse-item>
+      </el-collapse>
       <slot
         slot="footer"
         class="dialog-footer"/>
@@ -45,7 +74,13 @@
 </template>
 
 <script>
+import FriendListItem from './FriendListItem'
+import makeAuthHeaderBody from '../../plugins/id-token'
+
 export default {
+  components: {
+    FriendListItem
+  },
   props: {
     event: {
       required: true,
@@ -58,15 +93,29 @@ export default {
   data(){
     return{
       eventDialogVisible : false,
+      participants: [],
+      activeNames: ['owner','title']
+    }
+  },
+  computed: {
+    numOfParticipants(){
+      return this.participants.length
     }
   },
   methods:{
     toggleDisplayEventDialog(){
       this.eventDialogVisible = !this.eventDialogVisible
     },
-    getEventDetail(eventID){
-      // 将来的にeventIDを送って, APIサーバーからeventの詳細をもらうことを想定
-      console.log(eventID)
+    async getEventDetail(eventID){
+      const headers = await makeAuthHeaderBody()
+      const res = await this.$axios.get(`http://localhost:3000/events/${eventID}/participants`, {
+        headers
+      }).catch((err) => {
+        return err.response
+      })
+      if(res.status === 200){
+        this.participants = res.data.participants
+      }
     },
   }
 }
@@ -83,20 +132,25 @@ export default {
   margin-top: 13px;
   line-height: 12px;
 }
-dl {
-  margin: 5px;
-  display: flex;
-  font-size: 18px;
-}
 dt {
-  color: #AAA;
-  width: 90px;
+  margin-top: 10px;
+  font-weight: bold;
 }
-
 dd {
   margin: 0;
+  padding-left: 20px;
 }
 .owner-id{
   color: #AAA
+}
+.el-dialog{
+  max-width: 700px;
+}
+.clickable{
+  color: inherit;
+  cursor: pointer;
+}
+.collapse-body span{
+  padding-left: 20px;
 }
 </style>

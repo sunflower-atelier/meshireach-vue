@@ -7,7 +7,7 @@
         :event="event">
         <el-button
           type="primary"
-          @click="joinEvent">Join
+          @click="joinEvent(event.id)">Join
         </el-button>
       </event-list-item>
     </ul>
@@ -17,6 +17,7 @@
 <script>
 import EventListItem from './EventListItem'
 import { mapGetters, mapActions } from 'vuex'
+import makeAuthHeaderBody from '../../plugins/id-token'
 
 export default {
   components: {
@@ -34,8 +35,18 @@ export default {
     await this.fetchEventsFromAPIServer()
   },
   methods: {
-    joinEvent() {
-      this.$message.success('you joined event')
+    async joinEvent(eventID) {
+      const headers = await makeAuthHeaderBody()
+      const res = await this.$axios.post(`http://localhost:3000/events/${eventID}/join`,{} ,{
+        headers
+      }).catch((err) => {
+        return err.response
+      })
+      if(res.status === 201){
+        this.$message.success('you have joined event')
+      }else{
+        this.$message.error('you cannot join this event')
+      }
     },
     ...mapActions('home', [
       'fetchEventsFromAPIServer'
