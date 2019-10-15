@@ -19,6 +19,7 @@
 import EventList from '../components/home/EventList'
 import FriendList from '../components/home/FriendList'
 import MyEventList from '../components/home/MyEventList'
+import firebase from '../plugins/firebase'
 
 export default {
   layout : 'AuthPage',
@@ -26,6 +27,23 @@ export default {
     EventList,
     FriendList,
     MyEventList
+  },
+  async created(){
+    const messaging = firebase.messaging()
+    const token = await messaging.requestPermission()
+      .then(() => {
+        return messaging.getToken()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    messaging.onMessage((payload) => {
+      this.$notify({
+        title: 'Title',
+        message: payload
+      })
+    })
+    this.$axios.get(`http://localhost:3000/messaging?token=${token}`)
   }
 }
 </script>
