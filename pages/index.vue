@@ -20,6 +20,7 @@ import EventList from '../components/home/EventList'
 import FriendList from '../components/home/FriendList'
 import MyEventList from '../components/home/MyEventList'
 import firebase from '../plugins/firebase'
+import makeAuthHeaderBody from '~/plugins/id-token'
 
 export default {
   layout : 'AuthPage',
@@ -27,19 +28,6 @@ export default {
     EventList,
     FriendList,
     MyEventList
-  },
-  methods: {
-    async postDeviceToken(){
-      const messaging = firebase.messaging()
-      const token = await messaging.getToken()
-      this.$axios.post('http://localhost:3000/device/token', {
-          device_token: token,
-        },{
-          headers: authHeaderBody
-        }).catch((err) => {
-          return err.response
-      })
-    }
   },
   created() {
     if(firebase.messaging.isSupported()){
@@ -52,13 +40,27 @@ export default {
       })
       messaging.requestPermission()
         .then(() => {
-          postDeviceToken()
+          this.postDeviceToken()
         })
         .catch((error) => {
           console.log(error)
         })
       messaging.onTokenRefresh(() => {
-        postDeviceToken()
+        this.postDeviceToken()
+      })
+    }
+  },
+  methods: {
+    async postDeviceToken(){
+      const messaging = firebase.messaging()
+      const token = await messaging.getToken()
+      const authHeaderBody = await makeAuthHeaderBody()
+      this.$axios.post('http://localhost:3000/device/token', {
+        device_token: token,
+      },{
+        headers: authHeaderBody
+      }).catch((err) => {
+        return err.response
       })
     }
   }
