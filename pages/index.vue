@@ -28,22 +28,39 @@ export default {
     FriendList,
     MyEventList
   },
-  async created(){
-    const messaging = firebase.messaging()
-    const token = await messaging.requestPermission()
-      .then(() => {
-        return messaging.getToken()
+  methods: {
+    async postDeviceToken(){
+      const messaging = firebase.messaging()
+      const token = await messaging.getToken()
+      this.$axios.post('http://localhost:3000/device/token', {
+          device_token: token,
+        },{
+          headers: authHeaderBody
+        }).catch((err) => {
+          return err.response
       })
-      .catch((error) => {
-        console.log(error)
+    }
+  },
+  created() {
+    if(firebase.messaging.isSupported()){
+      const messaging = firebase.messaging()
+      messaging.onMessage((payload) => {
+        this.$notify({
+          title: payload.notification.title,
+          message: payload.notification.body
+        })
       })
-    messaging.onMessage((payload) => {
-      this.$notify({
-        title: 'Title',
-        message: payload
+      messaging.requestPermission()
+        .then(() => {
+          postDeviceToken()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      messaging.onTokenRefresh(() => {
+        postDeviceToken()
       })
-    })
-    this.$axios.get(`http://localhost:3000/messaging?token=${token}`)
+    }
   }
 }
 </script>
