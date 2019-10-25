@@ -45,6 +45,7 @@ module.exports = {
     '@nuxtjs/dotenv'
   ],
   axios: {
+    baseURL: process.env.BASE_URL
   }
 }
 

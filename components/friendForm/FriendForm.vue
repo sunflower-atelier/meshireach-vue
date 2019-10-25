@@ -53,7 +53,7 @@ export default {
         const friendID = this.friendForm.friendID
         const authHeaderBody = await makeAuthHeaderBody()
 
-        const res = await this.$axios.post('http://localhost:3000/friends', {
+        const res = await this.$axios.post('/friends', {
           searchID: friendID,
         },{
           headers: authHeaderBody

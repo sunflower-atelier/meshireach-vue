@@ -125,13 +125,13 @@ describe('post profile test', () => {
   })
 
   test('setCurrentUser will be invoked if response code is 200', async () => {
-    axiosMock.onPost('http://localhost:3000/profiles').reply(201)
+    axiosMock.onPost('/profiles').reply(201)
     await profileFormWrapper.vm.sendProfileToServer("searchID", "name", "message")
     expect(mutations.setCurrentUser).toHaveBeenCalled()
   })
 
   test('setCurrentUser will not be invoked if response code is 200', async () => {
-    axiosMock.onPost('http://localhost:3000/profiles').reply(400)
+    axiosMock.onPost('/profiles').reply(400)
     await profileFormWrapper.vm.sendProfileToServer("searchID", "name", "message")
     expect(mutations.setCurrentUser).not.toHaveBeenCalled()
   })
