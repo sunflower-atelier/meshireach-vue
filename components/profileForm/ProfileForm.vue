@@ -77,7 +77,7 @@ export default {
     },
     async sendProfileToServer(searchID, name, message){
       const authHeaderBody = await makeAuthHeaderBody()
-      const res = await this.$axios.post('http://localhost:3000/profiles', {
+      const res = await this.$axios.post('/profiles', {
         searchID: searchID,
         name: name,
         message: message,

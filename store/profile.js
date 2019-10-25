@@ -1,6 +1,8 @@
 import axios from 'axios'
 import makeAuthHeaderBody from '../plugins/id-token'
 
+const BASE_URL = process.env.BASE_URL
+
 export const state = () => ({
   currentUser: null
 })
@@ -24,7 +26,7 @@ export const mutations = {
 export const actions = {
   fetchUserFromAPIServer: async ({ commit }) => {
     const authHeaderBody = await makeAuthHeaderBody()
-    const res = await axios.get('http://localhost:3000/profiles', {
+    const res = await axios.get(`${BASE_URL}/profiles`, {
       headers: authHeaderBody
     }).catch((err) => {
       return err.response

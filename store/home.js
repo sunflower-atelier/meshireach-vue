@@ -2,10 +2,11 @@ import axios from 'axios'
 import moment from 'moment'
 import makeAuthHeaderBody from '../plugins/id-token'
 
+const BASE_URL = process.env.BASE_URL
 
 const fetchFrom = async (url) => {
   const headers = await makeAuthHeaderBody()
-  const res = await axios.get(url, {
+  const res = await axios.get(`${BASE_URL}${url}`, {
     headers
   }).catch((err) => {
     return err.response
@@ -56,21 +57,21 @@ export const mutations = {
 
 export const actions = {
   fetchEventsFromAPIServer: async ({ commit }) => {
-    const res = await fetchFrom('http://localhost:3000/events-subscriptions')
+    const res = await fetchFrom('/events-subscriptions')
 
     if (res.status === 200) {
       commit('setEvents', formatEventsDeadLine(res.data.events))
     }
   },
   fetchFriendsFromAPIServer: async ({ commit }) => {
-    const res = await fetchFrom('http://localhost:3000/friends')
+    const res = await fetchFrom('/friends')
 
     if (res.status === 200) {
       commit('setFriends', res.data.friends)
     }
   },
   fetchMyEventsFromAPIServer: async ({ commit }) => {
-    const res = await fetchFrom('http://localhost:3000/events')
+    const res = await fetchFrom('/events')
 
     if (res.status === 200) {
       commit('setMyEvents', formatEventsDeadLine(res.data.events))

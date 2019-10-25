@@ -30,8 +30,8 @@
       </div>
       <el-collapse v-model="activeNames">
         <el-collapse-item name="owner">
-          <template 
-            slot="title" 
+          <template
+            slot="title"
             class="collapse-title">
             owner
           </template>
@@ -40,8 +40,8 @@
           </div>
         </el-collapse-item>
         <el-collapse-item name="title">
-          <template 
-            slot="title" 
+          <template
+            slot="title"
             class="collapse-title">
             date
           </template>
@@ -50,15 +50,15 @@
           </div>
         </el-collapse-item>
         <el-collapse-item name="participants">
-          <template 
-            slot="title" 
+          <template
+            slot="title"
             class="collapse-title">
             participants
           </template>
           <div class="collapse-body">
             <ul>
               <li
-                v-for="(participant, index) in participants" 
+                v-for="(participant, index) in participants"
                 :key="index">
                 {{ participant.name }} (@{{ participant.searchID }})
               </li>
@@ -108,7 +108,7 @@ export default {
     },
     async getEventDetail(eventID){
       const headers = await makeAuthHeaderBody()
-      const res = await this.$axios.get(`http://localhost:3000/events/${eventID}/participants`, {
+      const res = await this.$axios.get(`/events/${eventID}/participants`, {
         headers
       }).catch((err) => {
         return err.response
