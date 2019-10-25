@@ -29,10 +29,15 @@ export default {
     FriendList,
     MyEventList
   },
+  data() {
+    return {
+      removeOnMessageFunction: null
+    }
+  },
   created() {
     if(firebase.messaging.isSupported()){
       const messaging = firebase.messaging()
-      messaging.onMessage((payload) => {
+      this.removeOnMessageFunction = messaging.onMessage((payload) => {
         this.$notify({
           title: payload.notification.title,
           message: payload.notification.body
@@ -49,6 +54,9 @@ export default {
         this.postDeviceToken()
       })
     }
+  },
+  beforeDestroy() {
+    this.removeOnMessageFunction()
   },
   methods: {
     async postDeviceToken(){
