@@ -47,6 +47,16 @@ module.exports = {
   axios: {
   },
   manifest: {
+    name: 'meshireach',
+    icons: [
+      {
+        src: "https://placehold.jp/192x192.png",
+        sizes: "192x192",
+        type: "image/png"
+      }
+    ],
+    start_url: "/",
+    display: "standalone",
     gcm_sender_id: '103953800507'// このgcm_sender_idは固定値
   }
 }
