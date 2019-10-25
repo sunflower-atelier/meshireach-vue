@@ -11,7 +11,6 @@ const fetchFrom = async (url) => {
   }).catch((err) => {
     return err.response
   })
-  console.log(`${BASE_URL}${url}`, process.env)
   return res
 }
 
