@@ -6,4 +6,5 @@ dist
 yarn-error.log
 .env
 .lvimrc
+sw.*
 
