@@ -61,6 +61,9 @@ module.exports = {
     start_url: '/',
     scope: '/',
     gcm_sender_id: '103953800507'// このgcm_sender_idは固定値
+  },
+  workbox: {
+    swURL: 'custom-sw.js',
   }
 }
 
