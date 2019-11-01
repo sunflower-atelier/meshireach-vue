@@ -63,7 +63,7 @@ export default {
       const messaging = firebase.messaging()
       const token = await messaging.getToken()
       const authHeaderBody = await makeAuthHeaderBody()
-      this.$axios.post('http://localhost:3000/device/token', {
+      this.$axios.post('/device/token', {
         device_token: token,
       },{
         headers: authHeaderBody
