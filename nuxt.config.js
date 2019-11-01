@@ -42,10 +42,29 @@ module.exports = {
   mode:'spa',
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/pwa'
   ],
   axios: {
     baseURL: process.env.BASE_URL
+  },
+  manifest: {
+    name: 'meshireach',
+    description: 'sns for having a meal with your friend ',
+    lang: 'ja',
+    icons: [
+      {
+        src: 'https://placehold.jp/192x192.png',
+        sizes: '192x192',
+        type: 'image/png'
+      }
+    ],
+    start_url: '/',
+    scope: '/',
+    gcm_sender_id: '103953800507'// このgcm_sender_idは固定値
+  },
+  workbox: {
+    swURL: 'custom-sw.js'
   }
 }
 

@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
   env: {
+    serviceworker: true,
     browser: true,
     node: true
   },
