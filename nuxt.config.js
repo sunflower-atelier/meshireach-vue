@@ -46,6 +46,7 @@ module.exports = {
     '@nuxtjs/pwa'
   ],
   axios: {
+    baseURL: process.env.BASE_URL
   },
   manifest: {
     name: 'meshireach',
@@ -64,7 +65,6 @@ module.exports = {
   },
   workbox: {
     swURL: 'custom-sw.js'
-  },
-  baseURL: process.env.BASE_URL
+  }
 }
 
