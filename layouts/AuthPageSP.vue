@@ -1,43 +1,55 @@
 <template>
   <el-container>
-    <el-aside width="170px">
-      <div
-        v-if="currentUser"
-        id="profile-wrapper">
-        <p id="user-name">{{ currentUser.name }}</p>
-        <p id="user-id">ID: {{ currentUser.searchID }}</p>
-      </div>
-      <el-menu>
-        <template v-if="currentUser">
-          <el-menu-item @click="toggleEventForm">
-            <i class="el-icon-dish"/>
-            <span>make meshi</span>
+    <el-header id="app-header">
+      <div>meshireach</div>
+      <el-button 
+        icon="el-icon-menu"
+        @click="openMenu"/>
+      <el-drawer
+        id="drawer-menu"
+        :visible.sync="isDrawerOpen"
+        :direction="drawerOpenDirection"
+        size="60%">
+        <div
+          v-if="currentUser"
+          id="profile-wrapper">
+          <p id="user-name">{{ currentUser.name }}</p>
+          <p id="user-id">ID: {{ currentUser.searchID }}</p>
+        </div>
+        <el-menu>
+          <template v-if="currentUser">
+            <el-menu-item @click="toggleEventForm">
+              <i class="el-icon-dish"/>
+              <span>make meshi</span>
+            </el-menu-item>
+            <el-menu-item @click="toggleFriendForm">
+              <i class="el-icon-user"/>
+              make friend
+            </el-menu-item>
+            <el-menu-item @click="userSetting">
+              <i class="el-icon-setting"/>
+              user setting
+            </el-menu-item>
+          </template>
+          <el-menu-item @click="signout">
+            <i class="el-icon-switch-button"/>
+            signout
           </el-menu-item>
-          <el-dialog
-            :visible.sync="eventFormVisible"
-            title="input meshi detail" >
-            <event-form @event-created="toggleEventForm"/>
-          </el-dialog>
-          <el-menu-item @click="toggleFriendForm">
-            <i class="el-icon-user"/>
-            make friend
-          </el-menu-item>
-          <el-dialog
-            :visible.sync="friendFormVisible"
-            title="input your friend's id" >
-            <friend-form @friend-created="toggleFriendForm"/>
-          </el-dialog>
-          <el-menu-item @click="userSetting">
-            <i class="el-icon-setting"/>
-            user setting
-          </el-menu-item>
-        </template>
-        <el-menu-item @click="signout">
-          <i class="el-icon-switch-button"/>
-          signout
-        </el-menu-item>
-      </el-menu>
-    </el-aside>
+        </el-menu>
+      </el-drawer>
+      <el-dialog
+        :visible.sync="eventFormVisible"
+        title="input meshi detail"
+        custom-class="sp-dialog">
+        <event-form @event-created="toggleEventForm"/>
+      </el-dialog>
+      <el-dialog
+        :visible.sync="friendFormVisible"
+        title="input your friend's id"
+        custom-class="sp-dialog">
+        <friend-form @friend-created="toggleFriendForm"/>
+      </el-dialog>
+    </el-header>
     <el-main>
       <nuxt/>
     </el-main>
@@ -67,7 +79,9 @@ export default{
   data(){
     return {
       friendFormVisible: false,
-      eventFormVisible: false
+      eventFormVisible: false,
+      isDrawerOpen: false,
+      drawerOpenDirection: 'rtl'
     }
   },
   computed: {
@@ -92,12 +106,15 @@ export default{
     },
     userSetting(){
       this.$message.success('user setting')
+    },
+    openMenu(){
+      this.isDrawerOpen = true
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
@@ -114,8 +131,11 @@ html {
   margin: 0;
 }
 
-.el-menu{
-  height: 80vh;
+#app-header{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
 }
 
 #user-name{
@@ -127,8 +147,15 @@ html {
   color: #a9a9a9;
 }
 #profile-wrapper{
-  padding: 20px;
+  padding: 0 20px 10px 20px;
   border-right: solid 1px #e6e6e6;
   border-bottom: solid 1px #e6e6e6;
 }
+</style>
+
+<style>
+.sp-dialog{
+  min-width: 200px;
+  width: 90%;
+} 
 </style>
