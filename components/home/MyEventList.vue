@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #my-event-list{
   list-style: none;
   max-height: 100vh;
