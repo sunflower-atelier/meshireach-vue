@@ -60,5 +60,6 @@ export default {
   list-style: none;
   max-height: 100vh;
   overflow: scroll;
+  padding-left: 0;
 }
 </style>

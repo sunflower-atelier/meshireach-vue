@@ -37,5 +37,6 @@ export default {
 #friend-list {
   max-height: 100vh;
   overflow: scroll;
+  padding-left: 0;
 }
 </style>
