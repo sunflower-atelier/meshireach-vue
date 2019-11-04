@@ -50,7 +50,7 @@
         <friend-form @friend-created="toggleFriendForm"/>
       </el-dialog>
     </el-header>
-    <el-main>
+    <el-main id="main-container">
       <nuxt/>
     </el-main>
   </el-container>
@@ -129,6 +129,10 @@ html {
 *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
+}
+
+#main-container{
+  padding: 0;
 }
 
 #app-header{
