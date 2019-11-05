@@ -56,7 +56,9 @@ export default {
     }
   },
   beforeDestroy() {
-    this.removeOnMessageFunction()
+    if(typeof(this.removeOnMessageFunction) === 'function'){
+      this.removeOnMessageFunction()
+    }
   },
   methods: {
     async postDeviceToken(){

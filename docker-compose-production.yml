@@ -5,13 +5,20 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
     restart: 'always'
-    logging:
-      driver: syslog
     ports:
-      - 80:3002
+      - 3002:3002
     volumes:
       - ./:/var/www/meshireach
     stdin_open: true
     tty: true
     environment:
       NODE_ENV: 'production'
+      PORT: 3002
+      HOST: 0.0.0.0
+      VIRTUAL_HOST: sunflower.meshireach.com
+    networks:
+      - meshireach
+
+networks:
+  meshireach:
+    external: true
