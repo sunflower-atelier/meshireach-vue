@@ -45,7 +45,6 @@ import makeAuthHeaderBody from '~/plugins/id-token'
 import * as validation from '~/util/validation'
 
 export default {
-  layout : 'AuthPage',
   data() {
     return {
       form: {
