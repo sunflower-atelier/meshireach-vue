@@ -23,7 +23,7 @@ import firebase from '../plugins/firebase'
 import makeAuthHeaderBody from '~/plugins/id-token'
 
 export default {
-  layout: (ctx) => ctx.isMobile ? 'AuthPageSP' : 'AuthPagePC',
+  layout: (ctx) => ctx.isMobile||ctx.isTablet ? 'AuthPageSP' : 'AuthPagePC',
   components: {
     EventList,
     FriendList,
