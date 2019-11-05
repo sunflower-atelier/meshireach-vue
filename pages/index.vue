@@ -56,7 +56,7 @@ export default {
     }
   },
   beforeDestroy() {
-    if(this.removeOnMessageFunction){
+    if(typeof(this.removeOnMessageFunction) === 'function'){
       this.removeOnMessageFunction()
     }
   },
