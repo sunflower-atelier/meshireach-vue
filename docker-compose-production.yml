@@ -4,8 +4,14 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    environment:
-      NODE_ENV: 'production'
     restart: 'always'
     logging:
       driver: syslog
+    ports:
+      - 80:3002
+    volumes:
+      - ./:/var/www/meshireach
+    stdin_open: true
+    tty: true
+    environment:
+      NODE_ENV: 'production'
