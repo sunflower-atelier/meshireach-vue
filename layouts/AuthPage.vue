@@ -91,7 +91,7 @@ export default{
       this.friendFormVisible = !this.friendFormVisible
     },
     userSetting(){
-      this.$message.success('user setting')
+      this.$router.push('/usersetting')
     }
   }
 }
