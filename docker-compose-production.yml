@@ -5,8 +5,6 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
     restart: 'always'
-    logging:
-      driver: syslog
     ports:
       - 80:3002
     volumes:
@@ -15,3 +13,11 @@ services:
     tty: true
     environment:
       NODE_ENV: 'production'
+      PORT: 3002
+      HOST: 0.0.0.0
+    networks:
+      - meshireach
+
+networks:
+  meshireach:
+    external: true
