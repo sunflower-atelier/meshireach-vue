@@ -6,7 +6,7 @@ services:
       dockerfile: ./docker/Dockerfile
     restart: 'always'
     ports:
-      - 80:3002
+      - 3002:3002
     volumes:
       - ./:/var/www/meshireach
     stdin_open: true
@@ -15,6 +15,7 @@ services:
       NODE_ENV: 'production'
       PORT: 3002
       HOST: 0.0.0.0
+      VIRTUAL_HOST: sunflower.meshireach.com
     networks:
       - meshireach
 
