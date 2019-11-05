@@ -8,6 +8,7 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install --prod
 EXPOSE 3002
+EXPOSE 80
 
 COPY . .
 RUN yarn build
