@@ -45,7 +45,8 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    'nuxt-device-detect'
   ],
   axios: {
     baseURL: process.env.BASE_URL

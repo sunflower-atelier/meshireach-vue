@@ -16,6 +16,7 @@
     </el-form-item>
     <el-form-item>
       <el-button
+        id="friend-form-button"
         type="primary"
         @click="submitForm('friendForm')">
         送信
@@ -72,5 +73,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#friend-form-button{
+  margin-top: 25px;
+}
 </style>
