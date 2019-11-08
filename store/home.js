@@ -33,7 +33,7 @@ export const getters = {
   getEvents: argState => argState.events,
   getFriends: argState => argState.friends,
   getMyEvents: argState => argState.myEvents,
-  getJoiningEvent: argState => argState.joiningEvent
+  getJoiningEvents: argState => argState.joiningEvent
 }
 
 export const mutations = {
@@ -58,7 +58,7 @@ export const mutations = {
   addJoiningEvent: (argState, event) => {
     argState.joiningEvent.push(event)
   },
-  setJoiningEvent: (argState, events) => {
+  setJoiningEvents: (argState, events) => {
     argState.joiningEvent = events
   }
 }
@@ -89,7 +89,7 @@ export const actions = {
     const res = await fetchFrom('/events-joining-list')
 
     if (res.status === 200) {
-      commit('setJoinigEvents', formatEventsDeadLine(res.data.events))
+      commit('setJoiningEvents', formatEventsDeadLine(res.data.events))
     }
   }
 }
