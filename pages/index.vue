@@ -7,6 +7,9 @@
       <el-tab-pane label="自分のめし募集">
         <my-event-list/>
       </el-tab-pane>
+      <el-tab-pane label="参加中">
+        <joining-event-list/>
+      </el-tab-pane>
       <el-tab-pane label="ダチリスト">
         <friend-list/>
       </el-tab-pane>
@@ -19,6 +22,7 @@
 import EventList from '../components/home/EventList'
 import FriendList from '../components/home/FriendList'
 import MyEventList from '../components/home/MyEventList'
+import JoiningEventList from '../components/home/JoiningEventList'
 import firebase from '../plugins/firebase'
 import makeAuthHeaderBody from '~/plugins/id-token'
 
@@ -27,7 +31,8 @@ export default {
   components: {
     EventList,
     FriendList,
-    MyEventList
+    MyEventList,
+    JoiningEventList
   },
   data() {
     return {
