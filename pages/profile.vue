@@ -5,7 +5,7 @@
 <script>
 import ProfileForm from '../components/profileForm/ProfileForm.vue'
 export default {
-  layout : 'AuthPage',
+  layout: (ctx) => ctx.isMobile||ctx.isTablet ? 'AuthPageSP' : 'AuthPagePC',
   components: {
     ProfileForm
   }
