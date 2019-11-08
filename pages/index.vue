@@ -7,7 +7,7 @@
       <el-tab-pane label="自分のめし募集">
         <my-event-list/>
       </el-tab-pane>
-      <el-tab-pane label="参加中">
+      <el-tab-pane label="参加中のめし">
         <joining-event-list/>
       </el-tab-pane>
       <el-tab-pane label="ダチリスト">

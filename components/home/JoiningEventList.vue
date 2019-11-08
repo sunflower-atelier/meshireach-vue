@@ -37,9 +37,10 @@ export default {
 </script>
 
 <style scoped>
-#joning-event-list{
+#joining-event-list{
   list-style: none;
   max-height: 100vh;
+  padding-left: 0;
   overflow: scroll;
 }
 </style>
