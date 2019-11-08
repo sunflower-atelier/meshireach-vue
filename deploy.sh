@@ -8,5 +8,4 @@ ssh ubuntu@160.16.220.69 << EOC
   docker container prune -f
   docker-compose -f docker-compose-production.yml build --no-cache
   nohup docker-compose -f docker-compose-production.yml up -d
-  ls
 EOC
