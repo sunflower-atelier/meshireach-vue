@@ -33,9 +33,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #friend-list {
   max-height: 100vh;
   overflow: scroll;
+  padding-left: 0;
 }
 </style>

@@ -55,10 +55,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #event-list{
   list-style: none;
   max-height: 100vh;
   overflow: scroll;
+  padding-left: 0;
 }
 </style>
