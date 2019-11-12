@@ -27,8 +27,28 @@ jobs:
       - run:
           name: test
           command: yarn test
+  deploy:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - ${FINGER_PRINT}
+      - run:
+          name: Start ssh-keyscan
+          command: ssh-keyscan ${HOST_NAME} >> ~/.ssh/known_hosts
+      - deploy:
+          name: Start deploy
+          command: sh ./deploy.sh
 
 workflows:
-  testing:
+  test_and_deploy:
     jobs:
       - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: deploy
