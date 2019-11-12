@@ -25,13 +25,15 @@ const formatEventsDeadLine = (events) => {
 export const state = () => ({
   events: null,
   friends: null,
-  myEvents: null
+  myEvents: null,
+  joiningEvent: null
 })
 
 export const getters = {
   getEvents: argState => argState.events,
   getFriends: argState => argState.friends,
-  getMyEvents: argState => argState.myEvents
+  getMyEvents: argState => argState.myEvents,
+  getJoiningEvents: argState => argState.joiningEvent
 }
 
 export const mutations = {
@@ -52,6 +54,12 @@ export const mutations = {
   },
   setMyEvents: (argState, events) => {
     argState.myEvents = events
+  },
+  addJoiningEvent: (argState, event) => {
+    argState.joiningEvent.push(event)
+  },
+  setJoiningEvents: (argState, events) => {
+    argState.joiningEvent = events
   }
 }
 
@@ -75,6 +83,13 @@ export const actions = {
 
     if (res.status === 200) {
       commit('setMyEvents', formatEventsDeadLine(res.data.events))
+    }
+  },
+  fetchJoiningEventsFromAPIServer: async ({ commit }) => {
+    const res = await fetchFrom('/events-joining-list')
+
+    if (res.status === 200) {
+      commit('setJoiningEvents', formatEventsDeadLine(res.data.events))
     }
   }
 }
