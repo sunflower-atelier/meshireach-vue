@@ -3,7 +3,7 @@
     <el-tabs 
       stretch 
       @tab-click="handleTabsClick">
-      <el-tab-pane name="eventList">
+      <el-tab-pane>
         <span slot="label">
           ダチのめし募集
           <el-badge 
@@ -12,17 +12,13 @@
         </span>
         <event-list @newEvent="addNewEventBadge"/>
       </el-tab-pane>
-      <el-tab-pane 
-        label="自分のめし募集"
-        name="myEventList">
+      <el-tab-pane label="自分のめし募集">
         <my-event-list/>
       </el-tab-pane>
-      <el-tab-pane 
-        label="参加中のめし"
-        name="joiningEventList">
+      <el-tab-pane label="参加中のめし">
         <joining-event-list/>
       </el-tab-pane>
-      <el-tab-pane name="friendList">
+      <el-tab-pane>
         <span slot="label">
           ダチリスト
           <el-badge
@@ -99,7 +95,6 @@ export default {
       })
     },
     handleTabsClick(tab){
-      console.log(tab.index)
       if(tab.index == 0){
         this.removeNewEventBadge()
       }else if(tab.index == 3){
