@@ -1,8 +1,14 @@
 <template>
   <div id="top-view-wrapper">
     <el-tabs stretch>
-      <el-tab-pane label="ダチのめし募集">
-        <event-list/>
+      <el-tab-pane>
+        <span slot="label">
+          ダチのめし募集
+          <el-badge 
+            v-if="hasNewEvent"
+            is-dot/>
+        </span>
+        <event-list @newEvent="addNewEventBadge"/>
       </el-tab-pane>
       <el-tab-pane label="自分のめし募集">
         <my-event-list/>
@@ -43,7 +49,8 @@ export default {
   data() {
     return {
       removeOnMessageFunction: null,
-      hasNewFriend: false
+      hasNewFriend: false,
+      hasNewEvent: false
     }
   },
   created() {
@@ -90,6 +97,15 @@ export default {
     },
     removeNewFriendBadge() {
       this.hasNewFriend = false
+    },
+    addNewEventBadge(){
+      this.hasNewEvent = true
+    },
+    removeNewEventBadge(){
+      this.hasNewEvent = false
+    },
+    tabClicked(){
+      console.log("aaaa")
     }
   }
 }
