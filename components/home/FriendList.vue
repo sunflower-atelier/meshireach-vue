@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import friendListItem from "./FriendListItem"
-import { mapGetters, mapActions } from "vuex"
+import friendListItem from './FriendListItem'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
     friendListItem
@@ -23,8 +23,8 @@ export default {
     friends() {
       return this.getFriends
     },
-    ...mapGetters("home", {
-      getFriends: "getFriends"
+    ...mapGetters('home', {
+      getFriends: 'getFriends'
     })
   },
   beforeDestroy() {
@@ -44,7 +44,7 @@ export default {
       const afterLength = this.friends.length
       if (beforeLength != afterLength) this.$emit('newFriend')
     },
-    ...mapActions("home", ["fetchFriendsFromAPIServer"])
+    ...mapActions('home', ['fetchFriendsFromAPIServer'])
   }
 }
 </script>
