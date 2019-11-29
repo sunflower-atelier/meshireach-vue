@@ -1,6 +1,8 @@
 <template>
   <div id="top-view-wrapper">
-    <el-tabs stretch>
+    <el-tabs 
+      stretch 
+      @tab-click="handleTabsClick">
       <el-tab-pane>
         <span slot="label">
           ダチのめし募集
@@ -16,7 +18,7 @@
       <el-tab-pane label="参加中のめし">
         <joining-event-list/>
       </el-tab-pane>
-      <el-tab-pane label="ダチリスト">
+      <el-tab-pane>
         <span slot="label">
           ダチリスト
           <el-badge
@@ -92,6 +94,13 @@ export default {
         return err.response
       })
     },
+    handleTabsClick(tab){
+      if(tab.index == 0){
+        this.removeNewEventBadge()
+      }else if(tab.index == 3){
+        this.removeNewFriendBadge()
+      }
+    },
     addNewFriendBadge() {
       this.hasNewFriend = true
     },
@@ -103,9 +112,6 @@ export default {
     },
     removeNewEventBadge(){
       this.hasNewEvent = false
-    },
-    tabClicked(){
-      console.log("aaaa")
     }
   }
 }

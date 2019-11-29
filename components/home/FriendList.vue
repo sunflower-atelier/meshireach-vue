@@ -31,11 +31,11 @@ export default {
     clearInterval(this.intervalId)
   },
   async created() {
+    await this.fetchFriendsFromAPIServer()
     const updateFriends = this.updateFriends
     this.intervalId = setInterval(() => {
       updateFriends()
     }, 10000)
-    await this.fetchFriendsFromAPIServer()
   },
   methods: {
     async updateFriends() {
