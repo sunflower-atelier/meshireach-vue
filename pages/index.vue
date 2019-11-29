@@ -11,7 +11,13 @@
         <joining-event-list/>
       </el-tab-pane>
       <el-tab-pane label="ダチリスト">
-        <friend-list/>
+        <span slot="label">
+          ダチリスト
+          <el-badge
+            v-if="hasNewFriend"
+            is-dot/>
+        </span>
+        <friend-list @newFriend="addNewFriendBadge"/>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -27,7 +33,7 @@ import firebase from '../plugins/firebase'
 import makeAuthHeaderBody from '~/plugins/id-token'
 
 export default {
-  layout: (ctx) => ctx.isMobile||ctx.isTablet ? 'AuthPageSP' : 'AuthPagePC',
+  layout: (ctx) => ctx.isMobile || ctx.isTablet ? 'AuthPageSP' : 'AuthPagePC',
   components: {
     EventList,
     FriendList,
@@ -36,11 +42,12 @@ export default {
   },
   data() {
     return {
-      removeOnMessageFunction: null
+      removeOnMessageFunction: null,
+      hasNewFriend: false
     }
   },
   created() {
-    if(firebase.messaging.isSupported()){
+    if (firebase.messaging.isSupported()) {
       const messaging = firebase.messaging()
       this.removeOnMessageFunction = messaging.onMessage((payload) => {
         this.$notify({
@@ -61,22 +68,28 @@ export default {
     }
   },
   beforeDestroy() {
-    if(typeof(this.removeOnMessageFunction) === 'function'){
+    if (typeof (this.removeOnMessageFunction) === 'function') {
       this.removeOnMessageFunction()
     }
   },
   methods: {
-    async postDeviceToken(){
+    async postDeviceToken() {
       const messaging = firebase.messaging()
       const token = await messaging.getToken()
       const authHeaderBody = await makeAuthHeaderBody()
       this.$axios.post('/device/token', {
         device_token: token,
-      },{
+      }, {
         headers: authHeaderBody
       }).catch((err) => {
         return err.response
       })
+    },
+    addNewFriendBadge() {
+      this.hasNewFriend = true
+    },
+    removeNewFriendBadge() {
+      this.hasNewFriend = false
     }
   }
 }
@@ -84,12 +97,12 @@ export default {
 
 <style>
 #top-view-wrapper {
-  max-width : 800px;
+  max-width: 800px;
   margin-top: 15px;
   margin-left: auto;
   margin-right: auto;
 }
-.el-tab-pane{
+.el-tab-pane {
   padding: 10px 15px 10px 15px;
 }
 </style>

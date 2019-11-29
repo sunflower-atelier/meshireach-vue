@@ -31,10 +31,19 @@ export default {
     clearInterval(this.intervalId)
   },
   async created() {
-    this.intervalId = setInterval(this.fetchFriendsFromAPIServer, 10000)
+    const updateFriends = this.updateFriends
+    this.intervalId = setInterval(() => {
+      updateFriends()
+    }, 10000)
     await this.fetchFriendsFromAPIServer()
   },
   methods: {
+    async updateFriends() {
+      const beforeLength = this.friends.length
+      await this.fetchFriendsFromAPIServer()
+      const afterLength = this.friends.length
+      if (beforeLength != afterLength) this.$emit('newFriend')
+    },
     ...mapActions("home", ["fetchFriendsFromAPIServer"])
   }
 }
