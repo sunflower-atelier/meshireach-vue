@@ -1,43 +1,39 @@
 <template>
-  <el-container>
-    <el-main>
-      <el-card>
-        <h1>プロフィール変更画面</h1>
-        <el-form
-          ref="form"
-          :model="form"
-          :rules="rules"
-          status-icon
-          label-position="top"
-          label-width="120px">
-          <el-form-item
-            label="ユーザーID"
-            prop="searchID">
-            <el-input
-              v-model="form.searchID"
-              placeholder="user id"/>
-          </el-form-item>
-          <el-form-item
-            label="名前"
-            prop="userName">
-            <el-input
-              v-model="form.userName"
-              placeholder="your name"/>
-          </el-form-item>
-          <el-form-item label="ひとこと">
-            <el-input
-              v-model="form.message"
-              placeholder="message to other users" />
-          </el-form-item>
-          <el-form-item>
-            <el-button
-              type="primary"
-              @click="submitForm('form')">送信</el-button>
-          </el-form-item>
-        </el-form>
-      </el-card>
-    </el-main>
-  </el-container>
+  <el-card>
+    <h1>プロフィール変更画面</h1>
+    <el-form
+      ref="form"
+      :model="form"
+      :rules="rules"
+      status-icon
+      label-position="top"
+      label-width="120px">
+      <el-form-item
+        label="ユーザーID"
+        prop="searchID">
+        <el-input
+          v-model="form.searchID"
+          placeholder="user id"/>
+      </el-form-item>
+      <el-form-item
+        label="名前"
+        prop="userName">
+        <el-input
+          v-model="form.userName"
+          placeholder="your name"/>
+      </el-form-item>
+      <el-form-item label="ひとこと">
+        <el-input
+          v-model="form.message"
+          placeholder="message to other users" />
+      </el-form-item>
+      <el-form-item>
+        <el-button
+          type="primary"
+          @click="submitForm('form')">送信</el-button>
+      </el-form-item>
+    </el-form>
+  </el-card>
 </template>
 
 <script>
@@ -46,7 +42,6 @@ import * as validation from '~/util/validation'
 import { mapGetters } from 'vuex'
 
 export default {
-  layout : 'AuthPage',
   data() {
     return {
       form: {

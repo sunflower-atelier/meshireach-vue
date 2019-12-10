@@ -7,17 +7,20 @@
         @back="goBack"/>
     </el-header>
     <el-main>
-      <edit-profile-form/>
+      <edit-profile-form class="setting-card"/>
+      <notification-setting class="setting-card"/>
     </el-main>
   </el-container>
 </template>
 
 <script>
-import EditProfileForm from '../components/profileForm/EditProfileForm.vue'
+import EditProfileForm from '../components/userSetting/EditProfileForm.vue'
+import NotificationSetting from '../components/userSetting/NotificationSetting.vue'
 export default {
   middleware: 'authorized',
   components: {
-    EditProfileForm
+    EditProfileForm,
+    NotificationSetting
   },
   methods: {
     goBack(){
@@ -31,5 +34,9 @@ export default {
 #back-header{
   padding: 20px;
   border-bottom: 1px solid #ccc;
+}
+.setting-card{
+  max-width: 700px;
+  margin: 20px auto;
 }
 </style>
