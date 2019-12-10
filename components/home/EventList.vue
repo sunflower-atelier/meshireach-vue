@@ -3,11 +3,12 @@
     <ul id="event-list">
       <event-list-item
         v-for="(event, index) in events"
+        :ref="`eventItem${event.id}`"
         :key="index"
         :event="event">
         <el-button
           type="primary"
-          @click="joinEvent(event.id)">Join
+          @click="joinEvent(event.id, `eventItem${event.id}`)">Join
         </el-button>
       </event-list-item>
     </ul>
@@ -48,7 +49,8 @@ export default {
     clearInterval(this.intervalId)
   },
   methods: {
-    async joinEvent(eventID) {
+    async joinEvent(eventID, refName) {
+
       const headers = await makeAuthHeaderBody()
       const res = await this.$axios.post(`/events/${eventID}/join`,{} ,{
         headers
@@ -57,6 +59,9 @@ export default {
       })
       if(res.status === 201){
         this.$message.success('you have joined event')
+        // refNameは一意に決まる, コードの妥当性は要検討
+        this.$refs[refName][0].toggleDisplayEventDialog()
+
       }else{
         this.$message.error('you cannot join this event')
       }
