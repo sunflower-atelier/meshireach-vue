@@ -1,8 +1,8 @@
 <template>
   <div>
-    <ul id="my-event-list">
+    <ul id="joining-event-list">
       <event-list-item
-        v-for="(event, index) in myEvents"
+        v-for="(event, index) in joiningEvents"
         :key="index"
         :event="event"/>
     </ul>
@@ -18,26 +18,29 @@ export default {
     EventListItem
   },
   computed: {
+    joiningEvents() {
+      return this.getJoiningEvents
+    },
     ...mapGetters('home', {
-      myEvents: 'getMyEvents'
+      getJoiningEvents: 'getJoiningEvents'
     })
   },
   async created() {
-    await this.fetchMyEventsFromAPIServer()
+    await this.fetchJoiningEventsFromAPIServer()
   },
   methods: {
     ...mapActions('home', [
-      'fetchMyEventsFromAPIServer'
+      'fetchJoiningEventsFromAPIServer'
     ])
   }
 }
 </script>
 
 <style scoped>
-#my-event-list{
+#joining-event-list{
   list-style: none;
   max-height: 100vh;
-  overflow: scroll;
   padding-left: 0;
+  overflow: scroll;
 }
 </style>

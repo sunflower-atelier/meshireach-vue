@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .friend-item-name {
   font-size: x-large;
 }

@@ -23,6 +23,11 @@ export default {
   components: {
     EventListItem
   },
+  data(){
+    return {
+      intervalId: undefined
+    }
+  },
   computed: {
     events() {
       return this.getEvents
@@ -33,6 +38,14 @@ export default {
   },
   async created() {
     await this.fetchEventsFromAPIServer()
+    const updateEventFunc = this.updateEvents
+    this.intervalId = setInterval(() => {
+      updateEventFunc()
+    }, 
+    10000)
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalId)
   },
   methods: {
     async joinEvent(eventID) {
@@ -50,15 +63,24 @@ export default {
     },
     ...mapActions('home', [
       'fetchEventsFromAPIServer'
-    ])
+    ]),
+    async updateEvents(){
+      const beforeLength = this.events.length
+      await this.fetchEventsFromAPIServer()
+      const afterLength = this.events.length
+      if(beforeLength != afterLength){
+        this.$emit('newEvent')
+      }
+    }
   }
 }
 </script>
 
-<style>
+<style scoped>
 #event-list{
   list-style: none;
   max-height: 100vh;
   overflow: scroll;
+  padding-left: 0;
 }
 </style>
