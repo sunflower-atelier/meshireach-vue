@@ -61,13 +61,14 @@ export default {
         this.$message.success('you have joined event')
         // refNameは一意に決まる, コードの妥当性は要検討
         this.$refs[refName][0].toggleDisplayEventDialog()
-
+        this.processJoining(eventID)
       }else{
         this.$message.error('you cannot join this event')
       }
     },
     ...mapActions('home', [
-      'fetchEventsFromAPIServer'
+      'fetchEventsFromAPIServer',
+      'processJoining'
     ]),
     async updateEvents(){
       const beforeLength = this.events.length
