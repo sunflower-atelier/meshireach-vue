@@ -1,4 +1,4 @@
-FROM node:8.16.0-alpine
+FROM node:10.17.0-alpine3.9
 WORKDIR /var/www/meshireach
 COPY . /var/www/meshireach
 RUN apk update &&\
