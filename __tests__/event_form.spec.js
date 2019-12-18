@@ -15,20 +15,35 @@ describe("validation test" , () => {
     })
   })
 
-  test('empty title is invalid',  () => {
-    const titleInput = eventFormWrapper.findAll('input').at(0)
-    titleInput.setValue('')
-    titleInput.trigger('blur')
-    expect(eventFormWrapper.find('.is-error').exists())
+  const validTitle = 'dish'
+  const nextDay = moment().add(1, 'd')
+  const validDate = nextDay.format('YYYY-MM-DD')
+  console.log(validDate)
+  const validTime = nextDay.format('12:00')
+
+  const validateForm = (input1, input2, input3, isSuccess, done) => {
+    const inputs = eventFormWrapper.findAll('input')
+
+    eventFormWrapper.vm.eventForm.title = input1
+    eventFormWrapper.vm.eventForm.date = input2
+    eventFormWrapper.vm.eventForm.time = input3
+
+    eventFormWrapper.vm.$refs['eventForm'].validate((valid) => {
+      expect(valid).toBe(isSuccess)
+      done()
+    })
+  }
+
+  test('valid input', (done) => {
+    validateForm(validTitle, validDate, validTime, true, done)
   })
 
-  test('past time is invalid', () => {
-    const dateInput = eventFormWrapper.findAll('input').at(0)
-    const timeInput = eventFormWrapper.findAll('input').at(1)
+  test('empty title is invalid',  (done) => {
+    validateForm('', validDate, validTime, false, done)
+  })
+
+  test('past time is invalid', (done) => {
     const now = moment()
-    dateInput.setValue(now.format('YYYY-MM-DD'))
-    timeInput.setValue('00:00')
-    timeInput.trigger('blur')
-    expect(eventFormWrapper.find('.is-error').exists())
+    validateForm(validTitle, now.format('YYYY-MM-DD'),'00:00', false, done)
   })
 })
