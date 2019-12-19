@@ -43,6 +43,9 @@ export const mutations = {
   setEvents: (argState, events) => {
     argState.events = events
   },
+  removeEvents: (argState, index) => {
+    argState.events.splice(index, 1)
+  },
   addFriends: (argState, friend) => {
     argState.friends.push(friend)
   },
@@ -90,6 +93,17 @@ export const actions = {
 
     if (res.status === 200) {
       commit('setJoiningEvents', formatEventsDeadLine(res.data.events))
+    }
+  },
+  processJoining: ({ commit, getters }, eventID) => {
+    const eventList = getters.getEvents
+    for(const index in eventList){
+      const event = eventList[index]
+      if(event.id == eventID){
+        commit('removeEvents', index)
+        commit('addJoiningEvent', event)
+        break
+      }
     }
   }
 }
