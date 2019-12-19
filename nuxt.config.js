@@ -12,7 +12,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'View of meshireach' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/png', href: '/meshireach.png' }
     ]
   },
   /*
@@ -57,7 +57,7 @@ module.exports = {
     lang: 'ja',
     icons: [
       {
-        src: 'https://placehold.jp/192x192.png',
+        src: '/icons/icon-192x192.png',
         sizes: '192x192',
         type: 'image/png'
       }
