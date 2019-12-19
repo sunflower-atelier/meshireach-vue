@@ -52,6 +52,7 @@
 <script>
 import moment from 'moment'
 import makeAuthHeaderBody from '~/plugins/id-token'
+import { mapGetters,mapMutations } from 'vuex'
 
 export default {
   data(){
@@ -88,7 +89,15 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters('profile', {
+      user: 'getCurrentUser'
+    })
+  },
   methods:{
+    ...mapMutations('home', [
+      'addMyEvents'
+    ]),
     async submitForm(formName){
       this.$refs[formName].validate(async (valid) => {
         if(!valid){
@@ -109,6 +118,15 @@ export default {
         })
         if(res.status === 201){
           this.$message.success('new event created')
+          
+          const event = {
+            id: res.data.eventId,
+            title : title,
+            deadline : deadline.format('YYYY MM/DD HH:mm'),
+            ownerID : this.user.searchID,
+            owner : this.user.name
+          }
+          this.addMyEvents(event)
           this.$refs[formName].resetFields()
           this.$emit('event-created')
         }
